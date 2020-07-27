@@ -12,13 +12,16 @@
 #import "CatModel.h"
 #import "CatViewDelegate.h"
 #import "CatCell.h"
+#import "DetailViewController.h"
 
 
 @interface MainPresenter () 
 
 @property (nonatomic, weak)  id<CatViewDelegate> catView;
 @property (nonatomic, strong) NetworkManager *networkManager;
-@property (nonatomic, strong) CatModel *model;
+//@property (nonatomic, strong) CatModel *model;
+@property (nonatomic, strong) DetailViewController *detailVC;
+
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic) int numberOfItems;
@@ -42,6 +45,10 @@
 
 -(void)setViewDelegate:(id<CatViewDelegate>)view {
     self.catView = view;
+}
+
+-(void)setDetailViewDelegate:(DetailViewController *)view {
+    self.detailVC = view;
 }
 
 -(void)registerCellsFor:(UICollectionView *)collectionView {
@@ -113,6 +120,14 @@
         self.isLoaded = NO;
     }
 }
+- (void)downloadImage:(NSString *)url {
+    __weak typeof(self) weakSelf = self;
+    [self.networkManager getCachedImageWithURL:url completion:^(NSString * url, UIImage * image, NSError * error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.detailVC.imageView.image = image;
+        });
+    }];
+}
 
 - (void)cancelDownloadingImage:(NSIndexPath*)indexPath {
     [self.networkManager cancelDownloadingForUrl:self.catsArray[indexPath.row].url];
@@ -127,6 +142,14 @@
         self.catView.numberOfItems = 1;
     }
     [self.catView.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void)pushDetailVC:(NSIndexPath *)indexPath {
+    
+    CatCell *cell = [self.catView.collectionView cellForItemAtIndexPath:indexPath];
+    DetailViewController *dvc = [[DetailViewController alloc]initWithImage:cell.catImageView.image andURL:cell.catImageURL];
+    dvc.presenter = self;
+    [self.catView presentDetailViewController:dvc];
 }
 
 @end

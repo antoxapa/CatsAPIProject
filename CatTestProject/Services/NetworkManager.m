@@ -39,7 +39,6 @@
         _queue = [[NSOperationQueue alloc] init];
         _operations = [NSMutableDictionary new];
         _cache = [[NSCache alloc]init];
-        _cache.countLimit = 50;
     }
     return self;
 }
