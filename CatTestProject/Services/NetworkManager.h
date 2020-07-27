@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSURLSession *session;
 
 - (instancetype)initWithParser:(JSONParser *)parser;
-- (void)loadCats:(void (^)(NSArray<CatModel *> *, NSError *))completion;
+- (void)loadCats:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion;
 - (void)getCachedImageWithURL:(NSString *)stringURL completion:(void(^)(NSString *, UIImage *, NSError *))completion;
 - (void)cancelDownloadingForUrl:(NSString *)url;
 

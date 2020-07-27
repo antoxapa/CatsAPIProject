@@ -16,10 +16,15 @@
 
 @interface MainPresenter () 
 
-@property (nonatomic, strong) NetworkManager *networkManager;
 @property (nonatomic, weak)  id<CatViewDelegate> catView;
+@property (nonatomic, strong) NetworkManager *networkManager;
 @property (nonatomic, strong) CatModel *model;
-@property (nonatomic, copy) NSArray<CatModel *> *catsArray;
+@property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
+@property (nonatomic) int numberOfItems;
+@property BOOL isLoaded;
+@property BOOL gridTapped;
+
 
 @end
 
@@ -29,22 +34,10 @@
     self = [super init];
     if (self) {
         _networkManager = networkManager;
+        _gridTapped = NO;
+        _isLoaded = NO;
     }
     return self;
-}
-
--(void)downloadCats {
-    [self.networkManager loadCats:^(NSArray<CatModel *> * array, NSError * error) {
-        self.catsArray = array;
-        [self.catView showCats:array];
-    }];
-}
--(void)loadImages {
-    for (CatModel *item in self.catsArray) {
-        [self.networkManager getCachedImageWithURL:item.url completion:^(NSString *url, UIImage * image, NSError * error) {
-            
-        }];
-    }
 }
 
 -(void)setViewDelegate:(id<CatViewDelegate>)view {
@@ -53,17 +46,21 @@
 
 -(void)registerCellsFor:(UICollectionView *)collectionView {
     [collectionView registerClass:[CatCell class] forCellWithReuseIdentifier:@"Cell"];
+    [collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"Footer"];
 }
+
+#pragma mark:- UICollectionViewDataSource
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CatCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     cell.catImageURL = self.catsArray[indexPath.row].url;
+    __weak typeof(self)weakSelf = self;
     [self.networkManager getCachedImageWithURL:self.catsArray[indexPath.row].url completion:^(NSString *url, UIImage * image, NSError * error) {
         if (error) {
-            
+            NSLog(@"%@", error);
         }
         if (image) {
-            if ([self.catsArray[indexPath.row].url isEqualToString:cell.catImageURL]) {
+            if ([weakSelf.catsArray[indexPath.row].url isEqualToString:cell.catImageURL]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     cell.catImageView.image = image;
                 });
@@ -73,11 +70,63 @@
     return cell;
 }
 
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section { 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"Footer" forIndexPath:indexPath];
+    
+    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [footer addSubview:self.indicator];
+    self.indicator.color = UIColor.whiteColor;
+    self.indicator.frame = CGRectMake(0, 0, 30, 30);
+    
+    self.indicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [self.indicator.centerXAnchor constraintEqualToAnchor:footer.centerXAnchor],
+        [self.indicator.centerYAnchor constraintEqualToAnchor:footer.centerYAnchor],
+    ]];
+    [self.indicator setUserInteractionEnabled:NO];
+    return footer;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.catsArray.count;
 }
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+
+#pragma mark:-Downloading
+-(void)downloadCats {
+    __weak typeof (self)weakSelf = self;
+    [self.networkManager loadCats:^(NSMutableArray<CatModel *> * array, NSError * error) {
+        weakSelf.catsArray = array;
+        [weakSelf.catView showCats:array];
+    }];
+}
+
+- (void)startLoadingImages {
+    if (!self.isLoaded) {
+        [self.indicator setHidden:NO];
+        [self.indicator startAnimating];
+        self.isLoaded = YES;
+        __weak typeof(self)weakSelf = self;
+        [self.networkManager loadCats:^(NSMutableArray<CatModel *> * array, NSError * error) {
+            NSMutableArray *cats = array;
+            [weakSelf.catView addMoreImages:cats];
+        }];
+        self.isLoaded = NO;
+    }
+}
+
+- (void)cancelDownloadingImage:(NSIndexPath*)indexPath {
     [self.networkManager cancelDownloadingForUrl:self.catsArray[indexPath.row].url];
+}
+
+-(void)gridButtonTapped {
+    if (self.catView.numberOfItems == 1) {
+        self.catView.numberOfItems = 3;
+        self.gridTapped = true;
+    } else {
+        self.gridTapped = NO;
+        self.catView.numberOfItems = 1;
+    }
+    [self.catView.collectionView.collectionViewLayout invalidateLayout];
 }
 
 @end

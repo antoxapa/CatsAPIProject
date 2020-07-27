@@ -11,8 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainViewController : UIViewController <CatViewDelegate>
+@interface MainViewController : UIViewController <CatViewDelegate, UICollectionViewDelegate>
+
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+@property (nonatomic) int numberOfItems;
+
+- (void)addMoreImages:(NSMutableArray<CatModel *>*)array;
 @end
 
 NS_ASSUME_NONNULL_END

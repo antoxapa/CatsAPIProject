@@ -9,6 +9,7 @@
 #import "SceneDelegate.h"
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "TabBarController.h"
 
 @interface SceneDelegate ()
 
@@ -19,10 +20,35 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions  API_AVAILABLE(ios(13.0)){
     UIWindow *window = [[UIWindow alloc]initWithWindowScene:(UIWindowScene *)scene];
-    MainViewController *mainVC = [MainViewController new];
+    TabBarController *mainVC = [TabBarController new];
     window.rootViewController = mainVC ;
     [window makeKeyAndVisible];
     self.window = window;
+    
+    if (@available(iOS 13.0, *)) {
+
+        UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame];
+
+        if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+
+            statusBar.backgroundColor = [UIColor systemOrangeColor];
+
+        }
+
+        [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
+
+
+
+    } else {
+        UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
+
+        if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+
+            statusBar.backgroundColor = [UIColor systemOrangeColor];
+
+        }
+
+    }
 }
 
 

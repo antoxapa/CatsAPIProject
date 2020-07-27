@@ -44,13 +44,15 @@
     return self;
 }
 
-- (void)loadCats:(void (^)(NSArray<CatModel *> *, NSError *))completion {
-    NSURL *url = [NSURL URLWithString:@"https://api.thecatapi.com/v1/images/search?limit=20"];
+- (void)loadCats:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion {
+    //    NSString *stringURL = [NSString stringWithFormat:@"https://api.thecatapi.com/v1/images/search?limit="];
+    NSURL *url = [NSURL URLWithString:@"https://api.thecatapi.com/v1/images/search?limit=21"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"GET";
     //    NSDictionary *headers = @{ @"x-api-key": @"028b8907-c580-4675-9246-2af353e9e81e"};
     //    [request setAllHTTPHeaderFields:headers];
     
+    __weak typeof(self)weakSelf = self;
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
@@ -58,7 +60,7 @@
             return;
         }
         
-        [self.parser parseCats:data completion:(completion)];
+        [weakSelf.parser parseCats:data completion:(completion)];
     }];
     
     [dataTask resume];
@@ -80,7 +82,7 @@
                     return;
                 }
                 UIImage *image = [UIImage imageWithData:data];
-                [self.cache setObject:image forKey:stringURL];
+                [weakSelf.cache setObject:image forKey:stringURL];
                 completion(stringURL ,image, nil);
             }];
         }

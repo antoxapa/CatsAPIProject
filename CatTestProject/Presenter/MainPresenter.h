@@ -12,13 +12,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainPresenter : NSObject <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface MainPresenter : NSObject <UICollectionViewDataSource>
 
+- (instancetype)initWithNetworkManager:(NetworkManager *)networkManager;
+- (void)registerCellsFor:(UICollectionView *)collectionView;
+- (void)setViewDelegate:(id<CatViewDelegate>)view;
 
--(void)registerCellsFor:(UICollectionView *)collectionView;
--(instancetype)initWithNetworkManager:(NetworkManager *)networkManager;
--(void)setViewDelegate:(id<CatViewDelegate>)view;
--(void)downloadCats;
+- (void)downloadCats;
+- (void)cancelDownloadingImage:(NSIndexPath *)indexPath;
+- (void)startLoadingImages;
+
+- (void)gridButtonTapped;
 
 @end
 

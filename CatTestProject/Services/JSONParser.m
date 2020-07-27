@@ -11,7 +11,7 @@
 
 @implementation JSONParser
 
-- (void)parseCats:(NSData *)data completion:(void (^)(NSArray<CatModel *> *, NSError *))completion {
+- (void)parseCats:(NSData *)data completion:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion {
     NSError *error;
     NSArray *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     if (error) {

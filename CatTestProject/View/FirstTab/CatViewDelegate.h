@@ -12,8 +12,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol CatViewDelegate <NSObject>
-- (void)showCats:(NSArray<CatModel *>*)array;
+
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+@property (nonatomic) int numberOfItems;
+
+- (void)showCats:(NSMutableArray<CatModel *>*)array;
+- (void)addMoreImages:(NSMutableArray<CatModel *>*)array;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -22,8 +22,8 @@
 -(void)setupViews {
     self.catImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cat"]];
     [self addSubview:self.catImageView];
-    self.catImageView.contentMode = UIViewContentModeScaleToFill;
-    self.catImageView.layer.cornerRadius = 5;
+    self.catImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.catImageView.layer.cornerRadius = 20;
     self.catImageView.layer.masksToBounds = YES;
     self.catImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[

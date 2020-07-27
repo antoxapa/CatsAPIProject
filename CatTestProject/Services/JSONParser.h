@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JSONParser : NSObject
-- (void)parseCats:(NSData *)data completion:(void (^)(NSArray<CatModel *> *, NSError *))completion;
+- (void)parseCats:(NSData *)data completion:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion;
 @end
 
 NS_ASSUME_NONNULL_END

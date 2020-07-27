@@ -21,6 +21,9 @@
 		067773FE24CB6EA900516D2B /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 067773FD24CB6EA900516D2B /* JSONParser.m */; };
 		069C24B624CC2F72003B8156 /* CatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24B524CC2F72003B8156 /* CatCell.m */; };
 		069C24BF24CDABDE003B8156 /* DownloadImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24BE24CDABDE003B8156 /* DownloadImageOperation.m */; };
+		069C24C824CE277E003B8156 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24C724CE277E003B8156 /* TabBarController.m */; };
+		069C24CB24CE2B36003B8156 /* LikedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24CA24CE2B36003B8156 /* LikedViewController.m */; };
+		069C24CE24CE2F4E003B8156 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24CD24CE2F4E003B8156 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,12 @@
 		069C24B524CC2F72003B8156 /* CatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatCell.m; sourceTree = "<group>"; };
 		069C24BD24CDABDE003B8156 /* DownloadImageOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadImageOperation.h; sourceTree = "<group>"; };
 		069C24BE24CDABDE003B8156 /* DownloadImageOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadImageOperation.m; sourceTree = "<group>"; };
+		069C24C624CE277E003B8156 /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		069C24C724CE277E003B8156 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		069C24C924CE2B36003B8156 /* LikedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikedViewController.h; sourceTree = "<group>"; };
+		069C24CA24CE2B36003B8156 /* LikedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikedViewController.m; sourceTree = "<group>"; };
+		069C24CC24CE2F4E003B8156 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		069C24CD24CE2F4E003B8156 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,11 +141,12 @@
 		067773EA24CAEB4200516D2B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				067773FB24CB321900516D2B /* CatViewDelegate.h */,
-				067773E724CAEB3200516D2B /* MainViewController.h */,
-				067773E824CAEB3200516D2B /* MainViewController.m */,
-				069C24B424CC2F72003B8156 /* CatCell.h */,
-				069C24B524CC2F72003B8156 /* CatCell.m */,
+				069C24C624CE277E003B8156 /* TabBarController.h */,
+				069C24C724CE277E003B8156 /* TabBarController.m */,
+				069C24D124CEBFE5003B8156 /* FirstTab */,
+				069C24D024CEBFDC003B8156 /* Second tab */,
+				069C24CF24CEBFD4003B8156 /* Third tab */,
+				069C24D224CEBFEF003B8156 /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,6 +180,43 @@
 				067773FD24CB6EA900516D2B /* JSONParser.m */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		069C24CF24CEBFD4003B8156 /* Third tab */ = {
+			isa = PBXGroup;
+			children = (
+				069C24CC24CE2F4E003B8156 /* LoginViewController.h */,
+				069C24CD24CE2F4E003B8156 /* LoginViewController.m */,
+			);
+			path = "Third tab";
+			sourceTree = "<group>";
+		};
+		069C24D024CEBFDC003B8156 /* Second tab */ = {
+			isa = PBXGroup;
+			children = (
+				069C24C924CE2B36003B8156 /* LikedViewController.h */,
+				069C24CA24CE2B36003B8156 /* LikedViewController.m */,
+			);
+			path = "Second tab";
+			sourceTree = "<group>";
+		};
+		069C24D124CEBFE5003B8156 /* FirstTab */ = {
+			isa = PBXGroup;
+			children = (
+				067773FB24CB321900516D2B /* CatViewDelegate.h */,
+				067773E724CAEB3200516D2B /* MainViewController.h */,
+				067773E824CAEB3200516D2B /* MainViewController.m */,
+			);
+			path = FirstTab;
+			sourceTree = "<group>";
+		};
+		069C24D224CEBFEF003B8156 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				069C24B424CC2F72003B8156 /* CatCell.h */,
+				069C24B524CC2F72003B8156 /* CatCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,15 +320,18 @@
 			files = (
 				069C24B624CC2F72003B8156 /* CatCell.m in Sources */,
 				067773F824CB2F0F00516D2B /* NetworkManager.m in Sources */,
+				069C24C824CE277E003B8156 /* TabBarController.m in Sources */,
 				067773D024CADF7700516D2B /* main.m in Sources */,
 				067773F124CAED5900516D2B /* MainPresenter.m in Sources */,
 				067773BC24CADF7600516D2B /* AppDelegate.m in Sources */,
 				067773F424CB24C000516D2B /* CatModel.m in Sources */,
 				067773FE24CB6EA900516D2B /* JSONParser.m in Sources */,
+				069C24CB24CE2B36003B8156 /* LikedViewController.m in Sources */,
 				067773C824CADF7600516D2B /* CatTestProject.xcdatamodeld in Sources */,
 				067773E924CAEB3200516D2B /* MainViewController.m in Sources */,
 				067773BF24CADF7600516D2B /* SceneDelegate.m in Sources */,
 				069C24BF24CDABDE003B8156 /* DownloadImageOperation.m in Sources */,
+				069C24CE24CE2F4E003B8156 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +482,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6HUZSCYG3W;
 				INFOPLIST_FILE = CatTestProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +500,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6HUZSCYG3W;
 				INFOPLIST_FILE = CatTestProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
