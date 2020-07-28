@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="3WR-ZN-tf7">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" adjustsFontSizeToFit="NO" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="3WR-ZN-tf7">
                     <rect key="frame" x="20" y="366" width="374" height="45"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -32,9 +32,9 @@
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-sx-9G4">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-sx-9G4">
                     <rect key="frame" x="20" y="519" width="374" height="45"/>
-                    <color key="backgroundColor" red="0.96224735117639071" green="0.9182855525915834" blue="0.96699744462966919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="backgroundColor" red="0.96224735120000005" green="0.9182855526" blue="0.96699744460000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="Gaw-td-nhy"/>
                     </constraints>
@@ -119,7 +119,7 @@
                         <action selector="showCatsButtonPressed:" destination="-1" eventType="touchUpInside" id="MA5-nN-mh8"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="HB8-yx-diC">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="HB8-yx-diC">
                     <rect key="frame" x="20" y="425.5" width="374" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="2jS-rP-uK2"/>
@@ -154,15 +154,14 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="WOd-sx-9G4" secondAttribute="trailing" constant="20" id="BGO-n5-AU0"/>
                 <constraint firstItem="3WR-ZN-tf7" firstAttribute="top" secondItem="dWR-Mf-d4D" secondAttribute="bottom" constant="70" id="HqG-SD-8pK"/>
                 <constraint firstAttribute="trailing" secondItem="VcM-4e-LeY" secondAttribute="trailing" constant="20" id="Hto-sf-YK7"/>
-                <constraint firstItem="HB8-yx-diC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JCn-7k-cDc"/>
                 <constraint firstItem="zoI-co-dCP" firstAttribute="top" secondItem="WOd-sx-9G4" secondAttribute="bottom" constant="8" id="JVm-6Q-Dpb"/>
                 <constraint firstItem="k7G-Zu-wtw" firstAttribute="top" secondItem="VcM-4e-LeY" secondAttribute="bottom" constant="22" id="KTt-aw-eSm"/>
                 <constraint firstItem="zoI-co-dCP" firstAttribute="leading" secondItem="0WJ-4V-NZZ" secondAttribute="trailing" constant="12" id="MAv-Is-gf9"/>
                 <constraint firstItem="k7G-Zu-wtw" firstAttribute="top" secondItem="zoI-co-dCP" secondAttribute="bottom" constant="8" id="ROi-WU-k5z"/>
                 <constraint firstItem="0WJ-4V-NZZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="TFC-d2-HTM"/>
                 <constraint firstItem="zoI-co-dCP" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="UK5-44-77w"/>
+                <constraint firstItem="dWR-Mf-d4D" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Wcv-K3-pRU"/>
                 <constraint firstItem="HB8-yx-diC" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Wyw-Vl-vjp"/>
-                <constraint firstItem="dWR-Mf-d4D" firstAttribute="centerX" secondItem="3WR-ZN-tf7" secondAttribute="centerX" id="XA1-PF-EZb"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="k7G-Zu-wtw" secondAttribute="trailing" constant="20" id="YTf-m6-rX1"/>
                 <constraint firstItem="WOd-sx-9G4" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="ZQn-Oo-QQU"/>
                 <constraint firstItem="VcM-4e-LeY" firstAttribute="leading" secondItem="zoI-co-dCP" secondAttribute="trailing" constant="12" id="c5Q-ZM-wFM"/>

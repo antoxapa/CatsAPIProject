@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainPresenter.h"
+#import "RegistrationViewDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RegistrationVC : UIViewController
+@interface RegistrationVC : UIViewController <RegistrationViewDelegate>
+
+@property (nonatomic, strong) MainPresenter *presenter;
 
 @end
 

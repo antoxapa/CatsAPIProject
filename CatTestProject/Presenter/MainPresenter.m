@@ -12,14 +12,21 @@
 #import "CatModel.h"
 #import "CatViewDelegate.h"
 #import "CatCell.h"
-#import "DetailViewController.h"
+#import "DetailViewDelegate.h"
+#import "AuthenticationViewDelegate.h"
+#import "EnterApiViewDelegate.h"
+#import "RegistrationViewDelegate.h"
 
 @interface MainPresenter () 
 
 @property (nonatomic, weak)  id<CatViewDelegate> catView;
-@property (nonatomic, strong) NetworkManager *networkManager;
-@property (nonatomic, strong) DetailViewController *detailVC;
+@property (nonatomic, weak)  id<AuthenticationViewDelegate> authView;
+@property (nonatomic, weak)  id<EnterApiViewDelegate> apiView;
+@property (nonatomic, weak)  id<RegistrationViewDelegate> registrationView;
+@property (nonatomic, strong) id<DetailViewDelegate> detailVC;
 
+
+@property (nonatomic, strong) NetworkManager *networkManager;
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic) int numberOfItems;
@@ -39,13 +46,27 @@
     return self;
 }
 
+#pragma mark:- Delegates
+
 -(void)setViewDelegate:(id<CatViewDelegate>)view {
     self.catView = view;
 }
 
--(void)setDetailViewDelegate:(DetailViewController *)view {
+-(void)setDetailViewDelegate:(id<DetailViewDelegate>)view {
     self.detailVC = view;
 }
+
+-(void)setAuthViewDelegate:(id<AuthenticationViewDelegate>)view {
+    self.authView = view;
+}
+
+-(void)setApiViewDelegate:(id<EnterApiViewDelegate>)view {
+    self.apiView = view;
+}
+-(void)setRegistrationViewDelegate:(id<RegistrationViewDelegate>)view {
+    self.registrationView = view;
+}
+
 
 -(void)registerCellsFor:(UICollectionView *)collectionView {
     [collectionView registerClass:[CatCell class] forCellWithReuseIdentifier:@"Cell"];
@@ -139,12 +160,44 @@
     [self.catView.collectionView.collectionViewLayout invalidateLayout];
 }
 
+
 - (void)pushDetailVC:(NSIndexPath *)indexPath {
     
-    CatCell *cell = [self.catView.collectionView cellForItemAtIndexPath:indexPath];
-    DetailViewController *dvc = [[DetailViewController alloc]initWithImage:cell.catImageView.image andURL:cell.catImageURL];
-    dvc.presenter = self;
-    [self.catView presentDetailViewController:dvc];
+//    CatCell *cell = [self.catView.collectionView cellForItemAtIndexPath:indexPath];
+//    DetailViewController *dvc = [[DetailViewController alloc]initWithImage:cell.catImageView.image andURL:cell.catImageURL];
+//    dvc.presenter = self;
+//    [self.catView presentDetailViewController:dvc];
 }
+
+#pragma mark:- AuthenticationViewDelegate methods
+
+- (void)pushRegisteredUser {
+    [self.authView pushRegisteredUser];
+}
+
+- (void)pushMainVC {
+    [self.authView pushMainVC];
+}
+
+- (void)pushRegistrationVC {
+    [self.authView pushRegistrationVC];
+}
+
+#pragma mark:- RegistrationViewDelegate methods
+
+- (void)pressNextButton {
+    [self.registrationView presentEnterAPIVC];
+}
+
+#pragma mark:- EnterApiViewDelegate methods
+- (void)pushRegisteredMainVC {
+    [self.apiView pushMainVC];
+}
+- (void)showApiWebPage {
+    [self.apiView showAPIWebPage];
+}
+
+
+
 
 @end

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EnterApiKeyVC">
+            <connections>
+                <outlet property="apiTF" destination="Ss7-oV-tL5" id="vXc-UB-8nq"/>
+                <outlet property="getAPIButton" destination="JMU-lx-Kmr" id="2Lh-QM-PAf"/>
+                <outlet property="registerButton" destination="83T-vb-iml" id="PEB-Xp-6F4"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your individual API-key to finish registration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xc-gA-9sb">
+                    <rect key="frame" x="20" y="124" width="374" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter API-key" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ss7-oV-tL5">
+                    <rect key="frame" x="20" y="153" width="374" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="Ddo-pD-qKr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="695-9d-htf">
+                    <rect key="frame" x="20" y="195" width="374" height="88"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMU-lx-Kmr">
+                            <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                            <color key="backgroundColor" red="0.96759289500000001" green="0.77563971279999999" blue="0.57642269130000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="I5X-6M-EaE"/>
+                            </constraints>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <state key="normal" title="Get API-key"/>
+                            <connections>
+                                <action selector="getAPIButtonTapped:" destination="-1" eventType="touchUpInside" id="Mko-Pd-iis"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83T-vb-iml">
+                            <rect key="frame" x="0.0" y="48" width="374" height="40"/>
+                            <color key="backgroundColor" red="0.96759289500000001" green="0.77563971279999999" blue="0.57642269130000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="kbm-h6-LBM"/>
+                            </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Register!"/>
+                            <connections>
+                                <action selector="registerButtonTapped:" destination="-1" eventType="touchUpInside" id="00b-lD-Ivk"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ss7-oV-tL5" firstAttribute="top" secondItem="5Xc-gA-9sb" secondAttribute="bottom" constant="8.5" id="0j4-cL-wdi"/>
+                <constraint firstItem="695-9d-htf" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="1me-by-VQY"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="695-9d-htf" secondAttribute="trailing" constant="20" id="7qO-Ll-YjX"/>
+                <constraint firstItem="5Xc-gA-9sb" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Go3-Mf-DMT"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Ss7-oV-tL5" secondAttribute="trailing" constant="20" id="Qan-nQ-6sR"/>
+                <constraint firstItem="5Xc-gA-9sb" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="Tbh-ba-aWB"/>
+                <constraint firstItem="5Xc-gA-9sb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="80" id="W6S-UD-sRc"/>
+                <constraint firstItem="Ss7-oV-tL5" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="dEP-FR-mbf"/>
+                <constraint firstItem="695-9d-htf" firstAttribute="top" secondItem="Ss7-oV-tL5" secondAttribute="bottom" constant="8" id="lHS-4R-EOG"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="5Xc-gA-9sb" secondAttribute="trailing" constant="20" id="lZY-Oy-hHd"/>
+                <constraint firstItem="Ss7-oV-tL5" firstAttribute="centerX" secondItem="5Xc-gA-9sb" secondAttribute="centerX" id="sKX-l9-jMJ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="137.68115942028987" y="150.66964285714286"/>
+        </view>
+    </objects>
+</document>

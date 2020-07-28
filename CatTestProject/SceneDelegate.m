@@ -24,6 +24,8 @@
     AuthenticationVC *vc = [[AuthenticationVC alloc]initWithNibName:@"AuthenticationVC" bundle:nil];
     UINavigationController *mainController = [[UINavigationController alloc]initWithRootViewController:vc];
     [mainController setNavigationBarHidden:YES];
+    mainController.navigationBar.barTintColor = [UIColor systemOrangeColor];
+    mainController.navigationBar.translucent = NO;
     window.rootViewController = mainController ;
     [window makeKeyAndVisible];
     self.window = window;

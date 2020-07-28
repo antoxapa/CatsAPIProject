@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06568C4C24D05AC50097084C /* EnterApiKeyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C4A24D05AC50097084C /* EnterApiKeyVC.m */; };
+		06568C4D24D05AC50097084C /* EnterApiKeyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06568C4B24D05AC50097084C /* EnterApiKeyVC.xib */; };
 		066583C724D01FC500723F3A /* AuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583C524D01FC500723F3A /* AuthenticationVC.m */; };
 		066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066583C624D01FC500723F3A /* AuthenticationVC.xib */; };
 		066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583CA24D0366D00723F3A /* RegistrationVC.m */; };
@@ -42,6 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06568C4824D042830097084C /* AuthenticationViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewDelegate.h; sourceTree = "<group>"; };
+		06568C4924D05AC50097084C /* EnterApiKeyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterApiKeyVC.h; sourceTree = "<group>"; };
+		06568C4A24D05AC50097084C /* EnterApiKeyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterApiKeyVC.m; sourceTree = "<group>"; };
+		06568C4B24D05AC50097084C /* EnterApiKeyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterApiKeyVC.xib; sourceTree = "<group>"; };
+		06568C4F24D068C00097084C /* EnterApiViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterApiViewDelegate.h; sourceTree = "<group>"; };
+		06568C5024D06D160097084C /* RegistrationViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationViewDelegate.h; sourceTree = "<group>"; };
 		066583C024CF876900723F3A /* DetailViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewDelegate.h; sourceTree = "<group>"; };
 		066583C424D01FC500723F3A /* AuthenticationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationVC.h; sourceTree = "<group>"; };
 		066583C524D01FC500723F3A /* AuthenticationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationVC.m; sourceTree = "<group>"; };
@@ -105,9 +113,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06568C4E24D068870097084C /* EnterApiVC */ = {
+			isa = PBXGroup;
+			children = (
+				06568C4F24D068C00097084C /* EnterApiViewDelegate.h */,
+				06568C4924D05AC50097084C /* EnterApiKeyVC.h */,
+				06568C4A24D05AC50097084C /* EnterApiKeyVC.m */,
+				06568C4B24D05AC50097084C /* EnterApiKeyVC.xib */,
+			);
+			path = EnterApiVC;
+			sourceTree = "<group>";
+		};
+		06568C5124D07B100097084C /* RegistrationViews */ = {
+			isa = PBXGroup;
+			children = (
+				066583CF24D0367B00723F3A /* AuthenticationVC */,
+				066583CE24D0367400723F3A /* RegistrationVC */,
+				06568C4E24D068870097084C /* EnterApiVC */,
+			);
+			path = RegistrationViews;
+			sourceTree = "<group>";
+		};
+		06568C5224D07B230097084C /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				069C24C624CE277E003B8156 /* TabBarController.h */,
+				069C24C724CE277E003B8156 /* TabBarController.m */,
+				069C24D124CEBFE5003B8156 /* FirstTab */,
+				069C24D024CEBFDC003B8156 /* Second tab */,
+				069C24CF24CEBFD4003B8156 /* Third tab */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
 		066583CE24D0367400723F3A /* RegistrationVC */ = {
 			isa = PBXGroup;
 			children = (
+				06568C5024D06D160097084C /* RegistrationViewDelegate.h */,
 				066583C924D0366D00723F3A /* RegistrationVC.h */,
 				066583CA24D0366D00723F3A /* RegistrationVC.m */,
 				066583CB24D0366D00723F3A /* RegistrationVC.xib */,
@@ -118,6 +160,7 @@
 		066583CF24D0367B00723F3A /* AuthenticationVC */ = {
 			isa = PBXGroup;
 			children = (
+				06568C4824D042830097084C /* AuthenticationViewDelegate.h */,
 				066583C424D01FC500723F3A /* AuthenticationVC.h */,
 				066583C524D01FC500723F3A /* AuthenticationVC.m */,
 				066583C624D01FC500723F3A /* AuthenticationVC.xib */,
@@ -175,13 +218,8 @@
 		067773EA24CAEB4200516D2B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				069C24C624CE277E003B8156 /* TabBarController.h */,
-				069C24C724CE277E003B8156 /* TabBarController.m */,
-				066583CF24D0367B00723F3A /* AuthenticationVC */,
-				066583CE24D0367400723F3A /* RegistrationVC */,
-				069C24D124CEBFE5003B8156 /* FirstTab */,
-				069C24D024CEBFDC003B8156 /* Second tab */,
-				069C24CF24CEBFD4003B8156 /* Third tab */,
+				06568C5124D07B100097084C /* RegistrationViews */,
+				06568C5224D07B230097084C /* MainScreen */,
 				069C24D624CF7E1F003B8156 /* DetailVC */,
 				069C24D224CEBFEF003B8156 /* Cells */,
 			);
@@ -346,6 +384,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06568C4D24D05AC50097084C /* EnterApiKeyVC.xib in Resources */,
 				067773CD24CADF7700516D2B /* LaunchScreen.storyboard in Resources */,
 				066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */,
 				067773CA24CADF7700516D2B /* Assets.xcassets in Resources */,
@@ -367,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06568C4C24D05AC50097084C /* EnterApiKeyVC.m in Sources */,
 				069C24B624CC2F72003B8156 /* CatCell.m in Sources */,
 				067773F824CB2F0F00516D2B /* NetworkManager.m in Sources */,
 				069C24C824CE277E003B8156 /* TabBarController.m in Sources */,
