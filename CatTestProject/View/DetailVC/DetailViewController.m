@@ -38,6 +38,7 @@
         [self.imageView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
     ]];
 }
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if ([self.imageView.image isEqual:[UIImage imageNamed:@"cat"]]) {
@@ -45,7 +46,5 @@
         [self.presenter downloadImage:self.url];
     }
 }
-
-
 
 @end

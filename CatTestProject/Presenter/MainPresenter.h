@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MainPresenter : NSObject <UICollectionViewDataSource>
 
+@property BOOL isLoaded;
+
 - (instancetype)initWithNetworkManager:(NetworkManager *)networkManager;
 - (void)registerCellsFor:(UICollectionView *)collectionView;
 - (void)setViewDelegate:(id<CatViewDelegate>)view;

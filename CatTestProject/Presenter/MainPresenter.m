@@ -25,7 +25,6 @@
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic) int numberOfItems;
-@property BOOL isLoaded;
 @property BOOL gridTapped;
 
 
@@ -117,7 +116,6 @@
             NSMutableArray *cats = array;
             [weakSelf.catView addMoreImages:cats];
         }];
-        self.isLoaded = NO;
     }
 }
 - (void)downloadImage:(NSString *)url {

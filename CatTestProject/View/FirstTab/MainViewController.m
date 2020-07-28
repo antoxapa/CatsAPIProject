@@ -85,6 +85,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.collectionView reloadData];
     });
+    self.presenter.isLoaded = NO;
 }
 
 #pragma mark:- UICollectionViewDelegate
