@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		066583C724D01FC500723F3A /* AuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583C524D01FC500723F3A /* AuthenticationVC.m */; };
+		066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066583C624D01FC500723F3A /* AuthenticationVC.xib */; };
+		066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583CA24D0366D00723F3A /* RegistrationVC.m */; };
+		066583CD24D0366D00723F3A /* RegistrationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066583CB24D0366D00723F3A /* RegistrationVC.xib */; };
 		067773BC24CADF7600516D2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 067773BB24CADF7600516D2B /* AppDelegate.m */; };
 		067773BF24CADF7600516D2B /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 067773BE24CADF7600516D2B /* SceneDelegate.m */; };
 		067773C824CADF7600516D2B /* CatTestProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067773C624CADF7600516D2B /* CatTestProject.xcdatamodeld */; };
@@ -39,6 +43,12 @@
 
 /* Begin PBXFileReference section */
 		066583C024CF876900723F3A /* DetailViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewDelegate.h; sourceTree = "<group>"; };
+		066583C424D01FC500723F3A /* AuthenticationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationVC.h; sourceTree = "<group>"; };
+		066583C524D01FC500723F3A /* AuthenticationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationVC.m; sourceTree = "<group>"; };
+		066583C624D01FC500723F3A /* AuthenticationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthenticationVC.xib; sourceTree = "<group>"; };
+		066583C924D0366D00723F3A /* RegistrationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationVC.h; sourceTree = "<group>"; };
+		066583CA24D0366D00723F3A /* RegistrationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationVC.m; sourceTree = "<group>"; };
+		066583CB24D0366D00723F3A /* RegistrationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationVC.xib; sourceTree = "<group>"; };
 		067773B724CADF7600516D2B /* CatTestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatTestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067773BA24CADF7600516D2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		067773BB24CADF7600516D2B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -95,6 +105,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		066583CE24D0367400723F3A /* RegistrationVC */ = {
+			isa = PBXGroup;
+			children = (
+				066583C924D0366D00723F3A /* RegistrationVC.h */,
+				066583CA24D0366D00723F3A /* RegistrationVC.m */,
+				066583CB24D0366D00723F3A /* RegistrationVC.xib */,
+			);
+			path = RegistrationVC;
+			sourceTree = "<group>";
+		};
+		066583CF24D0367B00723F3A /* AuthenticationVC */ = {
+			isa = PBXGroup;
+			children = (
+				066583C424D01FC500723F3A /* AuthenticationVC.h */,
+				066583C524D01FC500723F3A /* AuthenticationVC.m */,
+				066583C624D01FC500723F3A /* AuthenticationVC.xib */,
+			);
+			path = AuthenticationVC;
+			sourceTree = "<group>";
+		};
 		067773AE24CADF7600516D2B = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +177,8 @@
 			children = (
 				069C24C624CE277E003B8156 /* TabBarController.h */,
 				069C24C724CE277E003B8156 /* TabBarController.m */,
+				066583CF24D0367B00723F3A /* AuthenticationVC */,
+				066583CE24D0367400723F3A /* RegistrationVC */,
 				069C24D124CEBFE5003B8156 /* FirstTab */,
 				069C24D024CEBFDC003B8156 /* Second tab */,
 				069C24CF24CEBFD4003B8156 /* Third tab */,
@@ -315,7 +347,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				067773CD24CADF7700516D2B /* LaunchScreen.storyboard in Resources */,
+				066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */,
 				067773CA24CADF7700516D2B /* Assets.xcassets in Resources */,
+				066583CD24D0366D00723F3A /* RegistrationVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,8 +371,10 @@
 				067773F824CB2F0F00516D2B /* NetworkManager.m in Sources */,
 				069C24C824CE277E003B8156 /* TabBarController.m in Sources */,
 				067773D024CADF7700516D2B /* main.m in Sources */,
+				066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */,
 				067773F124CAED5900516D2B /* MainPresenter.m in Sources */,
 				069C24D524CF7E18003B8156 /* DetailViewController.m in Sources */,
+				066583C724D01FC500723F3A /* AuthenticationVC.m in Sources */,
 				067773BC24CADF7600516D2B /* AppDelegate.m in Sources */,
 				067773F424CB24C000516D2B /* CatModel.m in Sources */,
 				067773FE24CB6EA900516D2B /* JSONParser.m in Sources */,

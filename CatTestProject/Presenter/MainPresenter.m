@@ -14,19 +14,16 @@
 #import "CatCell.h"
 #import "DetailViewController.h"
 
-
 @interface MainPresenter () 
 
 @property (nonatomic, weak)  id<CatViewDelegate> catView;
 @property (nonatomic, strong) NetworkManager *networkManager;
-//@property (nonatomic, strong) CatModel *model;
 @property (nonatomic, strong) DetailViewController *detailVC;
 
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic) int numberOfItems;
 @property BOOL gridTapped;
-
 
 @end
 

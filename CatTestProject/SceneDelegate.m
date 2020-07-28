@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "TabBarController.h"
+#import "AuthenticationVC.h"
 
 @interface SceneDelegate ()
 
@@ -20,8 +21,10 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions  API_AVAILABLE(ios(13.0)){
     UIWindow *window = [[UIWindow alloc]initWithWindowScene:(UIWindowScene *)scene];
-    TabBarController *mainVC = [TabBarController new];
-    window.rootViewController = mainVC ;
+    AuthenticationVC *vc = [[AuthenticationVC alloc]initWithNibName:@"AuthenticationVC" bundle:nil];
+    UINavigationController *mainController = [[UINavigationController alloc]initWithRootViewController:vc];
+    [mainController setNavigationBarHidden:YES];
+    window.rootViewController = mainController ;
     [window makeKeyAndVisible];
     self.window = window;
     

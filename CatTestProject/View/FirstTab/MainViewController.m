@@ -88,6 +88,10 @@
     self.presenter.isLoaded = NO;
 }
 
+- (void)presentDetailViewController:(UIViewController *)controller {
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 #pragma mark:- UICollectionViewDelegate
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,8 +164,5 @@
     }
 }
 
-- (void)presentDetailViewController:(UIViewController *)controller {
-    [self presentViewController:controller animated:YES completion:nil];
-}
 
 @end
