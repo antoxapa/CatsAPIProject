@@ -14,7 +14,7 @@
 @interface TabBarController ()
 
 @property (nonatomic, strong) UINavigationController *firstVC;
-@property (nonatomic, strong) LikedViewController *secondVC;
+@property (nonatomic, strong) UINavigationController *secondVC;
 @property (nonatomic, strong) LoginViewController *thirdVC;
 
 @end
@@ -23,12 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setupViews];
     self.tabBar.barTintColor = [UIColor systemOrangeColor];
     self.tabBar.tintColor = [UIColor blackColor];
     self.tabBar.unselectedItemTintColor = [UIColor whiteColor];
-    
-    [self setupViews];
 }
 
 - (void)setupViews {
@@ -45,18 +43,21 @@
     
     LikedViewController *secondTab = [[LikedViewController alloc]init];
     
-    secondTab.view.backgroundColor = [UIColor whiteColor];
-    UITabBarItem *galleryTab = [[UITabBarItem alloc]initWithTitle:nil image:[UIImage imageNamed:@"like_unselected"] selectedImage:[UIImage imageNamed:@"like_selected"]];
-    secondTab.tabBarItem = galleryTab;
-    self.secondVC = secondTab;
+    UITabBarItem *likedTab = [[UITabBarItem alloc]initWithTitle:nil image:[UIImage imageNamed:@"upload_unselected"] selectedImage:[UIImage imageNamed:@"upload_selected"]];
+    secondTab.tabBarItem = likedTab;
     
-    LoginViewController *thirdTab = [[LoginViewController alloc]init];
+    self.secondVC = [[UINavigationController alloc]initWithRootViewController:secondTab];
+    self.secondVC.navigationBar.clipsToBounds = true;
+    self.secondVC.navigationBar.barTintColor = [UIColor systemOrangeColor];
+    self.secondVC.navigationBar.translucent = NO;
+    self.secondVC.navigationBar.layer.cornerRadius = 10;
+    self.secondVC.navigationBar.layer.maskedCorners = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+    
+    LoginViewController *thirdTab = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     UITabBarItem *login = [[UITabBarItem alloc]initWithTitle:nil image:[UIImage imageNamed:@"login_unselected"] selectedImage:[UIImage imageNamed:@"login_selected"]];
-    
-    thirdTab.tabBarItem = login;
-    
+
     self.thirdVC = thirdTab;
-    
+    thirdTab.tabBarItem = login;
     self.viewControllers = @[self.firstVC, self.secondVC, self.thirdVC];
     self.selectedIndex = 0;
 }

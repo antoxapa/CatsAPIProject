@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		06568C4C24D05AC50097084C /* EnterApiKeyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C4A24D05AC50097084C /* EnterApiKeyVC.m */; };
 		06568C4D24D05AC50097084C /* EnterApiKeyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06568C4B24D05AC50097084C /* EnterApiKeyVC.xib */; };
+		06568C5624D0B0D10097084C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C5424D0B0D10097084C /* LoginViewController.m */; };
+		06568C5724D0B0D10097084C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06568C5524D0B0D10097084C /* LoginViewController.xib */; };
 		066583C724D01FC500723F3A /* AuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583C524D01FC500723F3A /* AuthenticationVC.m */; };
 		066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066583C624D01FC500723F3A /* AuthenticationVC.xib */; };
 		066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583CA24D0366D00723F3A /* RegistrationVC.m */; };
@@ -29,7 +31,6 @@
 		069C24BF24CDABDE003B8156 /* DownloadImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24BE24CDABDE003B8156 /* DownloadImageOperation.m */; };
 		069C24C824CE277E003B8156 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24C724CE277E003B8156 /* TabBarController.m */; };
 		069C24CB24CE2B36003B8156 /* LikedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24CA24CE2B36003B8156 /* LikedViewController.m */; };
-		069C24CE24CE2F4E003B8156 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24CD24CE2F4E003B8156 /* LoginViewController.m */; };
 		069C24D524CF7E18003B8156 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24D424CF7E18003B8156 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,12 @@
 		06568C4B24D05AC50097084C /* EnterApiKeyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterApiKeyVC.xib; sourceTree = "<group>"; };
 		06568C4F24D068C00097084C /* EnterApiViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterApiViewDelegate.h; sourceTree = "<group>"; };
 		06568C5024D06D160097084C /* RegistrationViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationViewDelegate.h; sourceTree = "<group>"; };
+		06568C5324D0B0D10097084C /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		06568C5424D0B0D10097084C /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		06568C5524D0B0D10097084C /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		06568C5824D0B8DF0097084C /* LoginViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewDelegate.h; sourceTree = "<group>"; };
+		06568C5924D17E580097084C /* LikedViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikedViewDelegate.h; sourceTree = "<group>"; };
+		06568C5A24D1A4E80097084C /* ShowDismissProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowDismissProtocol.h; sourceTree = "<group>"; };
 		066583C024CF876900723F3A /* DetailViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewDelegate.h; sourceTree = "<group>"; };
 		066583C424D01FC500723F3A /* AuthenticationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationVC.h; sourceTree = "<group>"; };
 		066583C524D01FC500723F3A /* AuthenticationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationVC.m; sourceTree = "<group>"; };
@@ -89,8 +96,6 @@
 		069C24C724CE277E003B8156 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		069C24C924CE2B36003B8156 /* LikedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikedViewController.h; sourceTree = "<group>"; };
 		069C24CA24CE2B36003B8156 /* LikedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikedViewController.m; sourceTree = "<group>"; };
-		069C24CC24CE2F4E003B8156 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		069C24CD24CE2F4E003B8156 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		069C24D324CF7E18003B8156 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		069C24D424CF7E18003B8156 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +142,7 @@
 		06568C5224D07B230097084C /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				06568C5A24D1A4E80097084C /* ShowDismissProtocol.h */,
 				069C24C624CE277E003B8156 /* TabBarController.h */,
 				069C24C724CE277E003B8156 /* TabBarController.m */,
 				069C24D124CEBFE5003B8156 /* FirstTab */,
@@ -260,8 +266,10 @@
 		069C24CF24CEBFD4003B8156 /* Third tab */ = {
 			isa = PBXGroup;
 			children = (
-				069C24CC24CE2F4E003B8156 /* LoginViewController.h */,
-				069C24CD24CE2F4E003B8156 /* LoginViewController.m */,
+				06568C5824D0B8DF0097084C /* LoginViewDelegate.h */,
+				06568C5324D0B0D10097084C /* LoginViewController.h */,
+				06568C5424D0B0D10097084C /* LoginViewController.m */,
+				06568C5524D0B0D10097084C /* LoginViewController.xib */,
 			);
 			path = "Third tab";
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 		069C24D024CEBFDC003B8156 /* Second tab */ = {
 			isa = PBXGroup;
 			children = (
+				06568C5924D17E580097084C /* LikedViewDelegate.h */,
 				069C24C924CE2B36003B8156 /* LikedViewController.h */,
 				069C24CA24CE2B36003B8156 /* LikedViewController.m */,
 			);
@@ -386,6 +395,7 @@
 			files = (
 				06568C4D24D05AC50097084C /* EnterApiKeyVC.xib in Resources */,
 				067773CD24CADF7700516D2B /* LaunchScreen.storyboard in Resources */,
+				06568C5724D0B0D10097084C /* LoginViewController.xib in Resources */,
 				066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */,
 				067773CA24CADF7700516D2B /* Assets.xcassets in Resources */,
 				066583CD24D0366D00723F3A /* RegistrationVC.xib in Resources */,
@@ -420,10 +430,10 @@
 				067773FE24CB6EA900516D2B /* JSONParser.m in Sources */,
 				069C24CB24CE2B36003B8156 /* LikedViewController.m in Sources */,
 				067773C824CADF7600516D2B /* CatTestProject.xcdatamodeld in Sources */,
+				06568C5624D0B0D10097084C /* LoginViewController.m in Sources */,
 				067773E924CAEB3200516D2B /* MainViewController.m in Sources */,
 				067773BF24CADF7600516D2B /* SceneDelegate.m in Sources */,
 				069C24BF24CDABDE003B8156 /* DownloadImageOperation.m in Sources */,
-				069C24CE24CE2F4E003B8156 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

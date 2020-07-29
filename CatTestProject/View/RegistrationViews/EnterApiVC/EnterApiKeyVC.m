@@ -20,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.presenter = [MainPresenter sharedInstance];
     [self.presenter setApiViewDelegate:self];
     
     [self.registerButton setEnabled:NO];
@@ -33,7 +35,6 @@
 }
 
 - (IBAction)registerButtonTapped:(UIButton *)sender {
-    
     
     NSString *login = self.loginString;
     NSString *password = self.passwordString;
@@ -51,7 +52,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:users forKey:@"Users"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    [self.presenter pushRegisteredMainVC];
+    [self.presenter pushRegisteredUser:self.loginString password:self.passwordString apiKey:self.apiTF.text registered:YES];
 }
 
 - (void)showAPIWebPage {

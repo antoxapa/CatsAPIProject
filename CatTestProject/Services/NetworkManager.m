@@ -99,6 +99,42 @@
     [self.queue addOperation:operation];
 }
 
+- (void)uploadImage:(NSString *)apiKey fileName:(NSString *)fileName image:(UIImage *)image {
+    
+    NSString *boundary = [NSString stringWithFormat:@"Boundary-%@", NSUUID.UUID.UUIDString];
+    NSDictionary *headers = @{ @"content-type": [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary],
+                               @"x-api-key": apiKey };
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.thecatapi.com/v1/images/upload"]
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:10.0];
+    [request setHTTPMethod:@"POST"];
+    [request setAllHTTPHeaderFields:headers];
+    
+    NSMutableData *httpBody = [NSMutableData new];
+    
+    [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary]dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n", fileName]dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: image/%@\r\n\r\n", [fileName componentsSeparatedByString:@"."].lastObject]dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:UIImageJPEGRepresentation(image, 0.7)];
+    [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary]dataUsingEncoding:NSUTF8StringEncoding]];
+    request.HTTPBody = httpBody;
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+        } else {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+            NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", httpResponse);
+            NSLog(@"%@", newStr);
+        }
+    }];
+    [dataTask resume];
+}
+
 - (void)cancelDownloadingForUrl:(NSString *)url {
     NSArray<NSOperation *> *operations = self.operations[url];
     if (!operations) { return; }

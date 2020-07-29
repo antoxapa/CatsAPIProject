@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic) int numberOfItems;
+@property (nonatomic) BOOL registeredUser;
 
 - (void)addMoreImages:(NSMutableArray<CatModel *>*)array;
 @end

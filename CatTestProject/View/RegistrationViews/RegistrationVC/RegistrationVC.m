@@ -23,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.presenter = [MainPresenter sharedInstance];
     [self.registrationButton setEnabled:NO];
     [self.presenter setRegistrationViewDelegate:self];
     [self.loginTF addTarget:self action:@selector(loginTFDidChange:)forControlEvents:UIControlEventEditingChanged];
@@ -39,8 +41,20 @@
 }
 
 - (IBAction)nextButtonPressed:(UIButton *)sender {
-    [self.presenter pressNextButton];
-    
+    NSArray *users = [[NSUserDefaults standardUserDefaults]objectForKey:@"Users"];
+    if (users) {
+            for (NSDictionary *user in users) {
+            NSString *login = user[@"Login"];
+            if (![login isEqualToString:self.loginTF.text]) {
+                [self.presenter pressNextButton];
+                break;
+            } else {
+                [self.presenter showAlreadyExistAlert];
+            }
+        }
+    } else {
+        [self.presenter pressNextButton];
+    }
 }
 
 - (void)loginTFDidChange:(UITextField *)textField {
@@ -61,11 +75,20 @@
 
 - (void)presentEnterAPIVC {
     EnterApiKeyVC *vc = [[EnterApiKeyVC alloc]initWithNibName:@"EnterApiKeyVC" bundle:nil];
-    vc.presenter = self.presenter;
     vc.loginString = self.loginTF.text;
     vc.passwordString = self.passwordTF.text;
     
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)showAlreadyExistAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"Current login is already exist. Try another one." preferredStyle:UIAlertControllerStyleAlert];
+    __weak typeof(self) weakSelf = self;
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        weakSelf.tabBarController.selectedIndex = 0;
+    }];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

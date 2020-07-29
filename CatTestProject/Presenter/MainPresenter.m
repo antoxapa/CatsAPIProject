@@ -16,40 +16,68 @@
 #import "AuthenticationViewDelegate.h"
 #import "EnterApiViewDelegate.h"
 #import "RegistrationViewDelegate.h"
+#import "LoginViewDelegate.h"
+#import "LikedViewDelegate.h"
+#import "ShowDismissProtocol.h"
+#import "Photos/Photos.h"
 
 @interface MainPresenter () 
 
 @property (nonatomic, weak)  id<CatViewDelegate> catView;
-@property (nonatomic, weak)  id<AuthenticationViewDelegate> authView;
-@property (nonatomic, weak)  id<EnterApiViewDelegate> apiView;
-@property (nonatomic, weak)  id<RegistrationViewDelegate> registrationView;
-@property (nonatomic, strong) id<DetailViewDelegate> detailVC;
+@property (nonatomic, weak)  id<LikedViewDelegate, ShowDismissProtocol> likedView;
+@property (nonatomic, weak)  id<LoginViewDelegate> loginVew;
 
+@property (nonatomic, weak)  id<AuthenticationViewDelegate> authView;
+@property (nonatomic, weak)  id<RegistrationViewDelegate> registrationView;
+@property (nonatomic, weak)  id<EnterApiViewDelegate> apiView;
+
+@property (nonatomic, strong) id<DetailViewDelegate> detailVC;
 
 @property (nonatomic, strong) NetworkManager *networkManager;
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic) int numberOfItems;
+
+@property (nonatomic, strong) NSString *login;
+@property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *apiKey;
+@property BOOL registered;
+
 @property BOOL gridTapped;
 
 @end
 
 @implementation MainPresenter
 
--(instancetype)initWithNetworkManager:(NetworkManager *)networkManager {
-    self = [super init];
-    if (self) {
-        _networkManager = networkManager;
-        _gridTapped = NO;
-        _isLoaded = NO;
-    }
-    return self;
+
++ (instancetype)sharedInstance {
+    
+    static MainPresenter *sharedObject = nil;
+    static dispatch_once_t oncetoken;
+    
+    dispatch_once(&oncetoken, ^{
+        sharedObject = [[super alloc]init];
+    });
+    return sharedObject;
+}
+
+- (void)initNetworkManager {
+    JSONParser *parser = [[JSONParser alloc]init];
+    _networkManager = [[NetworkManager alloc]initWithParser:parser];
 }
 
 #pragma mark:- Delegates
 
 -(void)setViewDelegate:(id<CatViewDelegate>)view {
     self.catView = view;
+}
+
+-(void)setLikedViewDelegate:(id<LikedViewDelegate, ShowDismissProtocol>)view {
+    self.likedView = view;
+}
+
+-(void)setLoginViewDelegate:(id<LoginViewDelegate>)view {
+    self.loginVew = view;
 }
 
 -(void)setDetailViewDelegate:(id<DetailViewDelegate>)view {
@@ -66,7 +94,6 @@
 -(void)setRegistrationViewDelegate:(id<RegistrationViewDelegate>)view {
     self.registrationView = view;
 }
-
 
 -(void)registerCellsFor:(UICollectionView *)collectionView {
     [collectionView registerClass:[CatCell class] forCellWithReuseIdentifier:@"Cell"];
@@ -171,7 +198,11 @@
 
 #pragma mark:- AuthenticationViewDelegate methods
 
-- (void)pushRegisteredUser {
+- (void)pushRegisteredUser:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey registered:(BOOL)registered {
+    self.login = login;
+    self.password = password;
+    self.apiKey = apiKey;
+    self.registered = registered;
     [self.authView pushRegisteredUser];
 }
 
@@ -182,21 +213,82 @@
 - (void)pushRegistrationVC {
     [self.authView pushRegistrationVC];
 }
+- (void)showWrongDataAlert {
+    [self.authView showWrongLoginOrPassword];
+}
 
 #pragma mark:- RegistrationViewDelegate methods
 
 - (void)pressNextButton {
     [self.registrationView presentEnterAPIVC];
 }
+- (void)showAlreadyExistAlert {
+    [self.registrationView showAlreadyExistAlert];
+}
 
 #pragma mark:- EnterApiViewDelegate methods
 - (void)pushRegisteredMainVC {
+    
+    self.registered = YES;
     [self.apiView pushMainVC];
 }
 - (void)showApiWebPage {
     [self.apiView showAPIWebPage];
 }
 
+#pragma mark:- LikedViewDelegate methods
+- (void)isUserReadyForUpload {
+    if (self.registered) {
+         [self.likedView checkUserRegistered:self.apiKey];
+    } else {
+        [self.likedView showAlertController];
+    }
+}
+- (void)showAlertOne {
+    [self.likedView showAlertController];
+}
+
+- (void)uploadImage:(UIImage *)image andPath:(NSString *)fileName {
+    [self.networkManager uploadImage:self.apiKey fileName:fileName image:image];
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    NSURL *fileNameURL = info[UIImagePickerControllerImageURL];
+    NSString *fileName =  [NSString stringWithFormat:@"%@", fileNameURL];
+    [self uploadImage:chosenImage andPath:fileName];
+    [self dismisViewController:picker];
+}
+
+#pragma mark:- LoginViewDelegate methods
+- (void)showAlert {
+    [self.loginVew showAlertController];
+}
+
+- (void)updateScreenWithData {
+    [self.loginVew checkUser:self.login password:self.password apiKey:self.apiKey registered:self.registered];
+}
+
+- (void)changeProfileValues {
+    [self.loginVew changeProfileValues];
+}
+
+- (void)changeValues:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey and:(NSMutableArray *)users {
+    self.login = login;
+    self.password = password;
+    self.apiKey = apiKey;
+    [[NSUserDefaults standardUserDefaults] setObject:users forKey:@"Users"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)showViewController:(UIViewController *) viewController {
+    [self.likedView presentVC:viewController];
+}
+
+- (void)dismisViewController:(UIViewController *) viewController {
+    [self.likedView dismisVC:viewController];
+}
 
 
 

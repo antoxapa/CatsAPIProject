@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol RegistrationViewDelegate <NSObject>
 
 - (void)presentEnterAPIVC;
+- (void)showAlreadyExistAlert;
 
 @end
 

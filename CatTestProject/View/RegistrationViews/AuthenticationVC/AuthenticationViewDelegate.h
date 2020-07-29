@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pushMainVC;
 - (void)pushRegistrationVC;
 - (void)pushRegisteredUser;
+- (void)showWrongLoginOrPassword;
 
 @end
 

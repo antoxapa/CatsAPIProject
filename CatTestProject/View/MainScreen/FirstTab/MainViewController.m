@@ -16,8 +16,7 @@
 @property (nonatomic, strong) MainPresenter *presenter;
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
 @property (nonatomic, strong) UIView *footerIndicatorView;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property BOOL isLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
 
 @end
 
@@ -25,12 +24,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    JSONParser *parser = [[JSONParser alloc]init];
-    self.presenter = [[MainPresenter alloc] initWithNetworkManager:[[NetworkManager alloc] initWithParser:(JSONParser *)parser]];
+    self.presenter = [MainPresenter sharedInstance];
+    [self.presenter initNetworkManager];
+    
     [self.presenter setViewDelegate:self];
     self.catsArray = [NSMutableArray new];
     [self.presenter downloadCats];
     [self setupCollectionView];
+    [self setupActivityIndicator];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -39,7 +40,22 @@
     UIBarButtonItem *changeGrid=[[UIBarButtonItem alloc]initWithImage:
                                  [[UIImage imageNamed:@"icon1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                                 style:UIBarButtonItemStylePlain target:self action:@selector(changeLayout)];
-    self.navigationItem.rightBarButtonItem=changeGrid;
+    self.navigationItem.rightBarButtonItem = changeGrid;
+}
+
+- (void)setupActivityIndicator {
+    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.collectionView addSubview:self.indicator];
+    self.indicator.color = UIColor.whiteColor;
+    self.indicator.frame = CGRectMake(0, 0, 50, 50);
+    
+    self.indicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [self.indicator.centerXAnchor constraintEqualToAnchor:self.collectionView.centerXAnchor],
+        [self.indicator.centerYAnchor constraintEqualToAnchor:self.collectionView.centerYAnchor],
+    ]];
+    [self.indicator setUserInteractionEnabled:NO];
+    [self.indicator startAnimating];
 }
 
 - (void)setupCollectionView {
@@ -71,6 +87,7 @@
     self.catsArray = array;
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.indicator stopAnimating];
         [weakSelf.collectionView reloadData];
     });
 }

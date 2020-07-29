@@ -11,8 +11,9 @@
 
 @interface CatModel : NSObject
 
-@property (nonatomic, copy) NSString *imageID;
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, strong) NSString *imageID;
+@property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *apiKey;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
