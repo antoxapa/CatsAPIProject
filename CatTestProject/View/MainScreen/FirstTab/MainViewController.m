@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.presenter = [MainPresenter sharedInstance];
+    self.presenter = [[MainPresenter alloc]init];
     [self.presenter initNetworkManager];
     
     [self.presenter setViewDelegate:self];
@@ -151,7 +151,6 @@
     [self.presenter downloadCats];
 }
 
-
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     if (![collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
         [self.presenter cancelDownloadingImage:indexPath];
@@ -161,7 +160,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.presenter pushDetailVC:indexPath];
 }
-
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
@@ -180,6 +178,5 @@
         [self.presenter startLoadingImages];
     }
 }
-
 
 @end

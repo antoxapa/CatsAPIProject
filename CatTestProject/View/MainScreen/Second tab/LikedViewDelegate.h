@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)checkUserRegistered:(NSString *)apiKey;
 - (void)showAlertController;
+- (void)showErrorAlert:(NSString *)error;
 
 @end
 

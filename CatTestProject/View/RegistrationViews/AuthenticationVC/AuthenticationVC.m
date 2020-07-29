@@ -8,7 +8,7 @@
 
 #import "AuthenticationVC.h"
 #import "TabBarController.h"
-#import "MainPresenter.h"
+#import "AuthenticationPresenter.h"
 #import "RegistrationVC.h"
 
 @interface AuthenticationVC ()
@@ -23,14 +23,14 @@
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *apiKey;
 
-@property (strong, nonatomic) MainPresenter *presenter;
+@property (strong, nonatomic) AuthenticationPresenter *presenter;
 @end
 
 @implementation AuthenticationVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.presenter = [MainPresenter sharedInstance];
+    self.presenter = [[AuthenticationPresenter alloc]initWithUser];
     [self.presenter setAuthViewDelegate:self];
     [self setuNavBackButton];
     
@@ -42,6 +42,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    BOOL autoLogin = [self.presenter autoAuthenticateUser];
+    if (autoLogin) {
+        [self.presenter showMainVCWithoutRegistration];
+    }
 }
 
 - (void)setuNavBackButton {
@@ -67,33 +72,18 @@
 }
 
 - (IBAction)loginButtonPressed:(UIButton *)sender {
-    BOOL hereWeAre = NO;
-    NSArray *users = [[NSUserDefaults standardUserDefaults]objectForKey:@"Users"];
-    for (NSDictionary *user in users) {
-        self.login = user[@"Login"];
-        self.password = user[@"Password"];
-        self.apiKey = user[@"ApiKey"];
-        
-        if ([self.loginTF.text isEqualToString:self.login] && [self.passwordTF.text isEqualToString:self.password]) {
-            hereWeAre = YES;
-            [self.presenter pushRegisteredUser:self.login password:self.password apiKey:self.apiKey registered:YES];
-            break;
-        }
-    }
-    if (!hereWeAre) {
-         [self.presenter showWrongDataAlert];
-    }
+    [self.presenter checkUser:self.loginTF.text password:self.passwordTF.text];
 }
 
 - (IBAction)showCatsButtonPressed:(UIButton *)sender {
-    [self.presenter pushMainVC];
+    [self.presenter showMainVCWithoutRegistration];
 }
 
 - (IBAction)registerButtonPressed:(UIButton *)sender {
-    [self.presenter pushRegistrationVC];
+    [self.presenter showRegistrationViewController];
 }
 
-- (void)pushMainVC {
+- (void)showUnregisteredMainController {
     TabBarController *mainTBC = [[TabBarController alloc]init];
     [self.navigationController pushViewController:mainTBC animated:YES];
 }

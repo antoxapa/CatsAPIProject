@@ -8,8 +8,11 @@
 
 #import "EnterApiKeyVC.h"
 #import "TabBarController.h"
+#import "ApiViewPresenter.h"
 
 @interface EnterApiKeyVC ()
+
+@property (nonatomic, strong) ApiViewPresenter *presenter;
 @property (weak, nonatomic) IBOutlet UITextField *apiTF;
 @property (weak, nonatomic) IBOutlet UIButton *getAPIButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
@@ -21,13 +24,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.presenter = [MainPresenter sharedInstance];
+    self.presenter = [[ApiViewPresenter alloc]initWithUser];
     [self.presenter setApiViewDelegate:self];
     
     [self.registerButton setEnabled:NO];
     [self.apiTF addTarget:self
                    action:@selector(apiEntered:)
-    forControlEvents:UIControlEventEditingChanged];
+         forControlEvents:UIControlEventEditingChanged];
 }
 
 - (IBAction)getAPIButtonTapped:(UIButton *)sender {
@@ -35,24 +38,7 @@
 }
 
 - (IBAction)registerButtonTapped:(UIButton *)sender {
-    
-    NSString *login = self.loginString;
-    NSString *password = self.passwordString;
-    NSString *apiKey = self.apiTF.text;
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Users"]) {
-        NSMutableArray *users = [[[NSUserDefaults standardUserDefaults]objectForKey:@"Users"] mutableCopy];
-        NSDictionary *user = @{@"Login": login, @"Password":password, @"ApiKey":apiKey};
-        [users addObject:user];
-        [[NSUserDefaults standardUserDefaults] setObject:users forKey:@"Users"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        NSDictionary *user = @{@"Login": login, @"Password":password, @"ApiKey":apiKey};
-        NSArray *users = [NSArray arrayWithObject:user];
-        [[NSUserDefaults standardUserDefaults] setObject:users forKey:@"Users"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    [self.presenter pushRegisteredUser:self.loginString password:self.passwordString apiKey:self.apiTF.text registered:YES];
+    [self.presenter registerUserAndPushMainVC:self.loginString password:self.passwordString apiKey:self.apiTF.text isActive:@"YES"];
 }
 
 - (void)showAPIWebPage {

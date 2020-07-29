@@ -7,9 +7,10 @@
 //
 
 #import "LoginViewController.h"
-#import "MainPresenter.h"
+#import "LoginViewPresenter.h"
 
 @interface LoginViewController ()
+
 @property (weak, nonatomic) IBOutlet UIView *topHeaderView;
 @property (weak, nonatomic) IBOutlet UIStackView *titlesStackView;
 @property (weak, nonatomic) IBOutlet UIStackView *buttonsStackView;
@@ -19,9 +20,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *apiKeyTF;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 
-@property BOOL registeredUser;
 
-@property (strong, nonatomic) MainPresenter *presenter;
+@property (strong, nonatomic) LoginViewPresenter *presenter;
 @end
 
 @implementation LoginViewController
@@ -30,31 +30,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.presenter = [MainPresenter sharedInstance];
+    self.presenter = [[LoginViewPresenter alloc]initWithUser];
+    
     [self.presenter setLoginViewDelegate:self];
-    [self.presenter updateScreenWithData];
     
     self.topHeaderView.clipsToBounds = YES;
     self.topHeaderView.layer.cornerRadius = 10;
     self.topHeaderView.layer.maskedCorners = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+    [self.apiKeyTF setUserInteractionEnabled:NO];
+    [self.loginTF setUserInteractionEnabled:NO];
+    [self.passwordTF setUserInteractionEnabled:NO];
+    
+    [self checkUserStatus];
     
 }
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    if (self.registeredUser) {
-        [self.titlesStackView setHidden:NO];
-        [self.buttonsStackView setHidden:NO];
-    } else {
-        [self.titlesStackView setHidden:YES];
-        [self.buttonsStackView setHidden:YES];
-        [self.editButton setHidden:YES];
-        [self.presenter showAlert];
+}
+
+- (void)checkUserStatus {
+    NSDictionary *user = [self.presenter checkUserActivityStatus];
+    if (user) {
+        self.apiKeyTF.text = user[@"ApiKey"];
+        self.loginTF.text = user[@"Login"];
+        self.passwordTF.text = user[@"Password"];
     }
 }
 
 - (IBAction)editButtonPressed:(UIButton *)sender {
     [self.presenter changeProfileValues];
+}
+- (IBAction)logoutButtonPressed:(UIButton *)sender {
+    [self.presenter logout];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (void)showAlertController {
@@ -73,52 +81,39 @@
 }
 
 - (void)changeProfileValues {
-    NSMutableArray *users = [[[NSUserDefaults standardUserDefaults]objectForKey:@"Users"] mutableCopy];
-    __weak typeof (self)weakSelf = self;
-    for (int i = 0; i <users.count; i++) {
-        NSMutableDictionary *mutableUser = [users[i] mutableCopy];
-        
-        if ([self.loginTF.text isEqualToString:mutableUser[@"Login"]]) {
-            
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                textField.placeholder = self.loginTF.text;
-                textField.secureTextEntry = NO;
-            }];
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                textField.placeholder = self.passwordTF.text;
-                textField.secureTextEntry = NO;
-            }];
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                textField.placeholder = self.apiKeyTF.text;
-                textField.secureTextEntry = NO;
-            }];
-            UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                mutableUser[@"Login"] = [[alertController textFields][0] text];
-                weakSelf.loginTF.text = [[alertController textFields][0] text];
-                mutableUser[@"Password"] = [[alertController textFields][1] text];
-                weakSelf.passwordTF.text = [[alertController textFields][1] text];
-                mutableUser[@"ApiKey"] = [[alertController textFields][2] text];
-                weakSelf.apiKeyTF.text = [[alertController textFields][2] text];
-                
-                [users replaceObjectAtIndex:i withObject:mutableUser];
-                [weakSelf.presenter changeValues:weakSelf.loginTF.text password:weakSelf.passwordTF.text apiKey:weakSelf.apiKeyTF.text and:users];
-            }];
-            [alertController addAction:confirmAction];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            }];
-            [alertController addAction:cancelAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-            break;
-        }
-    }
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = self.loginTF.text;
+        textField.secureTextEntry = NO;
+    }];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = self.passwordTF.text;
+        textField.secureTextEntry = NO;
+    }];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = self.apiKeyTF.text;
+        textField.secureTextEntry = NO;
+    }];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        weakSelf.loginTF.text = [[alertController textFields][0] text];
+        weakSelf.passwordTF.text = [[alertController textFields][1] text];
+        weakSelf.apiKeyTF.text = [[alertController textFields][2] text];
+        [self.presenter changeValues:weakSelf.loginTF.text password:weakSelf.passwordTF.text apiKey:weakSelf.apiKeyTF.text];
+    }];
+    [alertController addAction:confirmAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
-- (void)checkUser:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey registered:(BOOL)registered {
-    self.loginTF.text = login;
-    self.passwordTF.text = password;
-    self.apiKeyTF.text = apiKey;
-    self.registeredUser = registered;
-}
+//- (void)checkUser:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey registered:(BOOL)registered {
+//    self.loginTF.text = login;
+//    self.passwordTF.text = password;
+//    self.apiKeyTF.text = apiKey;
+//    self.registeredUser = registered;
+//}
 
 @end

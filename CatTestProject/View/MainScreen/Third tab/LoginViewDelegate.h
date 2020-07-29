@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showAlertController;
 - (void)changeProfileValues;
-- (void)checkUser:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey registered:(BOOL)registered;
+- (void)checkUserStatus;
 
 @end
 

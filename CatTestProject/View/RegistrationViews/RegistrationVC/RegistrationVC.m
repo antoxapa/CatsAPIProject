@@ -8,10 +8,11 @@
 
 #import "RegistrationVC.h"
 #import "EnterApiKeyVC.h"
+#import "RegistrationPresenter.h"
 
 @interface RegistrationVC ()
 
-
+@property (nonatomic, strong) RegistrationPresenter *presenter;
 @property (weak, nonatomic) IBOutlet UITextField *loginTF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 @property (weak, nonatomic) IBOutlet UILabel *registrationLabel;
@@ -24,12 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.presenter = [MainPresenter sharedInstance];
-    [self.registrationButton setEnabled:NO];
+    self.presenter = [[RegistrationPresenter alloc] initWithUser] ;
     [self.presenter setRegistrationViewDelegate:self];
+    
     [self.loginTF addTarget:self action:@selector(loginTFDidChange:)forControlEvents:UIControlEventEditingChanged];
     [self.passwordTF addTarget:self action:@selector(passwordTFDidChange:)forControlEvents:UIControlEventEditingChanged];
-    
+    [self.registrationButton setEnabled:NO];
     [self setuNavBackButton];
     
 }
@@ -41,20 +42,7 @@
 }
 
 - (IBAction)nextButtonPressed:(UIButton *)sender {
-    NSArray *users = [[NSUserDefaults standardUserDefaults]objectForKey:@"Users"];
-    if (users) {
-            for (NSDictionary *user in users) {
-            NSString *login = user[@"Login"];
-            if (![login isEqualToString:self.loginTF.text]) {
-                [self.presenter pressNextButton];
-                break;
-            } else {
-                [self.presenter showAlreadyExistAlert];
-            }
-        }
-    } else {
-        [self.presenter pressNextButton];
-    }
+    [self.presenter checkUserCurrentLogin:self.loginTF.text];
 }
 
 - (void)loginTFDidChange:(UITextField *)textField {
@@ -77,7 +65,6 @@
     EnterApiKeyVC *vc = [[EnterApiKeyVC alloc]initWithNibName:@"EnterApiKeyVC" bundle:nil];
     vc.loginString = self.loginTF.text;
     vc.passwordString = self.passwordTF.text;
-    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

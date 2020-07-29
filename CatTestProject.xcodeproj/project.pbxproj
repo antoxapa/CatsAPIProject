@@ -11,6 +11,12 @@
 		06568C4D24D05AC50097084C /* EnterApiKeyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06568C4B24D05AC50097084C /* EnterApiKeyVC.xib */; };
 		06568C5624D0B0D10097084C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C5424D0B0D10097084C /* LoginViewController.m */; };
 		06568C5724D0B0D10097084C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06568C5524D0B0D10097084C /* LoginViewController.xib */; };
+		06568C6024D1ED560097084C /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C5F24D1ED560097084C /* UserManager.m */; };
+		06568C6324D1F6D10097084C /* AuthenticationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C6224D1F6D00097084C /* AuthenticationPresenter.m */; };
+		06568C6624D1FCA70097084C /* RegistrationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C6524D1FCA70097084C /* RegistrationPresenter.m */; };
+		06568C6924D200DF0097084C /* ApiViewPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C6824D200DF0097084C /* ApiViewPresenter.m */; };
+		06568C6F24D20AE10097084C /* LoginViewPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C6E24D20AE10097084C /* LoginViewPresenter.m */; };
+		06568C7324D228D50097084C /* UploadPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C7224D228D50097084C /* UploadPresenter.m */; };
 		066583C724D01FC500723F3A /* AuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583C524D01FC500723F3A /* AuthenticationVC.m */; };
 		066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066583C624D01FC500723F3A /* AuthenticationVC.xib */; };
 		066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583CA24D0366D00723F3A /* RegistrationVC.m */; };
@@ -57,6 +63,18 @@
 		06568C5824D0B8DF0097084C /* LoginViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewDelegate.h; sourceTree = "<group>"; };
 		06568C5924D17E580097084C /* LikedViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikedViewDelegate.h; sourceTree = "<group>"; };
 		06568C5A24D1A4E80097084C /* ShowDismissProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowDismissProtocol.h; sourceTree = "<group>"; };
+		06568C5E24D1ED560097084C /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		06568C5F24D1ED560097084C /* UserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
+		06568C6124D1F6D00097084C /* AuthenticationPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationPresenter.h; sourceTree = "<group>"; };
+		06568C6224D1F6D00097084C /* AuthenticationPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationPresenter.m; sourceTree = "<group>"; };
+		06568C6424D1FCA70097084C /* RegistrationPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationPresenter.h; sourceTree = "<group>"; };
+		06568C6524D1FCA70097084C /* RegistrationPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationPresenter.m; sourceTree = "<group>"; };
+		06568C6724D200DF0097084C /* ApiViewPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApiViewPresenter.h; sourceTree = "<group>"; };
+		06568C6824D200DF0097084C /* ApiViewPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApiViewPresenter.m; sourceTree = "<group>"; };
+		06568C6D24D20AE10097084C /* LoginViewPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewPresenter.h; sourceTree = "<group>"; };
+		06568C6E24D20AE10097084C /* LoginViewPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewPresenter.m; sourceTree = "<group>"; };
+		06568C7124D228D50097084C /* UploadPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadPresenter.h; sourceTree = "<group>"; };
+		06568C7224D228D50097084C /* UploadPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadPresenter.m; sourceTree = "<group>"; };
 		066583C024CF876900723F3A /* DetailViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewDelegate.h; sourceTree = "<group>"; };
 		066583C424D01FC500723F3A /* AuthenticationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationVC.h; sourceTree = "<group>"; };
 		066583C524D01FC500723F3A /* AuthenticationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationVC.m; sourceTree = "<group>"; };
@@ -152,6 +170,51 @@
 			path = MainScreen;
 			sourceTree = "<group>";
 		};
+		06568C6A24D20AB10097084C /* ApiPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				06568C6724D200DF0097084C /* ApiViewPresenter.h */,
+				06568C6824D200DF0097084C /* ApiViewPresenter.m */,
+			);
+			path = ApiPresenter;
+			sourceTree = "<group>";
+		};
+		06568C6B24D20AB90097084C /* RegistrationPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				06568C6424D1FCA70097084C /* RegistrationPresenter.h */,
+				06568C6524D1FCA70097084C /* RegistrationPresenter.m */,
+			);
+			path = RegistrationPresenter;
+			sourceTree = "<group>";
+		};
+		06568C6C24D20AC50097084C /* AuthenticationPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				06568C6124D1F6D00097084C /* AuthenticationPresenter.h */,
+				06568C6224D1F6D00097084C /* AuthenticationPresenter.m */,
+			);
+			path = AuthenticationPresenter;
+			sourceTree = "<group>";
+		};
+		06568C7024D2289A0097084C /* LoginPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				06568C6D24D20AE10097084C /* LoginViewPresenter.h */,
+				06568C6E24D20AE10097084C /* LoginViewPresenter.m */,
+			);
+			path = LoginPresenter;
+			sourceTree = "<group>";
+		};
+		06568C7424D228E60097084C /* UploadPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				06568C7124D228D50097084C /* UploadPresenter.h */,
+				06568C7224D228D50097084C /* UploadPresenter.m */,
+			);
+			path = UploadPresenter;
+			sourceTree = "<group>";
+		};
 		066583CE24D0367400723F3A /* RegistrationVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,7 +264,7 @@
 				067773BE24CADF7600516D2B /* SceneDelegate.m */,
 				067773F924CB2F1900516D2B /* Services */,
 				067773F524CB24CB00516D2B /* Model */,
-				067773EE24CAED2C00516D2B /* Presenter */,
+				067773EE24CAED2C00516D2B /* Presenters */,
 				067773EA24CAEB4200516D2B /* View */,
 				067773C924CADF7700516D2B /* Assets.xcassets */,
 				067773CB24CADF7700516D2B /* LaunchScreen.storyboard */,
@@ -232,13 +295,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		067773EE24CAED2C00516D2B /* Presenter */ = {
+		067773EE24CAED2C00516D2B /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
 				067773EF24CAED5900516D2B /* MainPresenter.h */,
 				067773F024CAED5900516D2B /* MainPresenter.m */,
+				06568C7424D228E60097084C /* UploadPresenter */,
+				06568C6C24D20AC50097084C /* AuthenticationPresenter */,
+				06568C6B24D20AB90097084C /* RegistrationPresenter */,
+				06568C6A24D20AB10097084C /* ApiPresenter */,
+				06568C7024D2289A0097084C /* LoginPresenter */,
 			);
-			path = Presenter;
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 		067773F524CB24CB00516D2B /* Model */ = {
@@ -259,6 +327,8 @@
 				069C24BE24CDABDE003B8156 /* DownloadImageOperation.m */,
 				067773FC24CB6EA900516D2B /* JSONParser.h */,
 				067773FD24CB6EA900516D2B /* JSONParser.m */,
+				06568C5E24D1ED560097084C /* UserManager.h */,
+				06568C5F24D1ED560097084C /* UserManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -424,14 +494,20 @@
 				066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */,
 				067773F124CAED5900516D2B /* MainPresenter.m in Sources */,
 				069C24D524CF7E18003B8156 /* DetailViewController.m in Sources */,
+				06568C6F24D20AE10097084C /* LoginViewPresenter.m in Sources */,
+				06568C7324D228D50097084C /* UploadPresenter.m in Sources */,
+				06568C6324D1F6D10097084C /* AuthenticationPresenter.m in Sources */,
 				066583C724D01FC500723F3A /* AuthenticationVC.m in Sources */,
+				06568C6624D1FCA70097084C /* RegistrationPresenter.m in Sources */,
 				067773BC24CADF7600516D2B /* AppDelegate.m in Sources */,
 				067773F424CB24C000516D2B /* CatModel.m in Sources */,
 				067773FE24CB6EA900516D2B /* JSONParser.m in Sources */,
+				06568C6924D200DF0097084C /* ApiViewPresenter.m in Sources */,
 				069C24CB24CE2B36003B8156 /* LikedViewController.m in Sources */,
 				067773C824CADF7600516D2B /* CatTestProject.xcdatamodeld in Sources */,
 				06568C5624D0B0D10097084C /* LoginViewController.m in Sources */,
 				067773E924CAEB3200516D2B /* MainViewController.m in Sources */,
+				06568C6024D1ED560097084C /* UserManager.m in Sources */,
 				067773BF24CADF7600516D2B /* SceneDelegate.m in Sources */,
 				069C24BF24CDABDE003B8156 /* DownloadImageOperation.m in Sources */,
 			);

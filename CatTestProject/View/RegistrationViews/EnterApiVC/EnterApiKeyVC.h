@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainPresenter.h"
 #import "EnterApiViewDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EnterApiKeyVC : UIViewController <EnterApiViewDelegate>
 
-@property (nonatomic, strong) MainPresenter *presenter;
 @property (nonatomic, strong) NSString *loginString;
 @property (nonatomic, strong) NSString *passwordString;
 

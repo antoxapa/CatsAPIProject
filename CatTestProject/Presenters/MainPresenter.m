@@ -24,12 +24,6 @@
 @interface MainPresenter () 
 
 @property (nonatomic, weak)  id<CatViewDelegate> catView;
-@property (nonatomic, weak)  id<LikedViewDelegate, ShowDismissProtocol> likedView;
-@property (nonatomic, weak)  id<LoginViewDelegate> loginVew;
-
-@property (nonatomic, weak)  id<AuthenticationViewDelegate> authView;
-@property (nonatomic, weak)  id<RegistrationViewDelegate> registrationView;
-@property (nonatomic, weak)  id<EnterApiViewDelegate> apiView;
 
 @property (nonatomic, strong) id<DetailViewDelegate> detailVC;
 
@@ -49,18 +43,6 @@
 
 @implementation MainPresenter
 
-
-+ (instancetype)sharedInstance {
-    
-    static MainPresenter *sharedObject = nil;
-    static dispatch_once_t oncetoken;
-    
-    dispatch_once(&oncetoken, ^{
-        sharedObject = [[super alloc]init];
-    });
-    return sharedObject;
-}
-
 - (void)initNetworkManager {
     JSONParser *parser = [[JSONParser alloc]init];
     _networkManager = [[NetworkManager alloc]initWithParser:parser];
@@ -72,27 +54,8 @@
     self.catView = view;
 }
 
--(void)setLikedViewDelegate:(id<LikedViewDelegate, ShowDismissProtocol>)view {
-    self.likedView = view;
-}
-
--(void)setLoginViewDelegate:(id<LoginViewDelegate>)view {
-    self.loginVew = view;
-}
-
 -(void)setDetailViewDelegate:(id<DetailViewDelegate>)view {
     self.detailVC = view;
-}
-
--(void)setAuthViewDelegate:(id<AuthenticationViewDelegate>)view {
-    self.authView = view;
-}
-
--(void)setApiViewDelegate:(id<EnterApiViewDelegate>)view {
-    self.apiView = view;
-}
--(void)setRegistrationViewDelegate:(id<RegistrationViewDelegate>)view {
-    self.registrationView = view;
 }
 
 -(void)registerCellsFor:(UICollectionView *)collectionView {
@@ -196,99 +159,6 @@
 //    [self.catView presentDetailViewController:dvc];
 }
 
-#pragma mark:- AuthenticationViewDelegate methods
-
-- (void)pushRegisteredUser:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey registered:(BOOL)registered {
-    self.login = login;
-    self.password = password;
-    self.apiKey = apiKey;
-    self.registered = registered;
-    [self.authView pushRegisteredUser];
-}
-
-- (void)pushMainVC {
-    [self.authView pushMainVC];
-}
-
-- (void)pushRegistrationVC {
-    [self.authView pushRegistrationVC];
-}
-- (void)showWrongDataAlert {
-    [self.authView showWrongLoginOrPassword];
-}
-
-#pragma mark:- RegistrationViewDelegate methods
-
-- (void)pressNextButton {
-    [self.registrationView presentEnterAPIVC];
-}
-- (void)showAlreadyExistAlert {
-    [self.registrationView showAlreadyExistAlert];
-}
-
-#pragma mark:- EnterApiViewDelegate methods
-- (void)pushRegisteredMainVC {
-    
-    self.registered = YES;
-    [self.apiView pushMainVC];
-}
-- (void)showApiWebPage {
-    [self.apiView showAPIWebPage];
-}
-
-#pragma mark:- LikedViewDelegate methods
-- (void)isUserReadyForUpload {
-    if (self.registered) {
-         [self.likedView checkUserRegistered:self.apiKey];
-    } else {
-        [self.likedView showAlertController];
-    }
-}
-- (void)showAlertOne {
-    [self.likedView showAlertController];
-}
-
-- (void)uploadImage:(UIImage *)image andPath:(NSString *)fileName {
-    [self.networkManager uploadImage:self.apiKey fileName:fileName image:image];
-    
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    NSURL *fileNameURL = info[UIImagePickerControllerImageURL];
-    NSString *fileName =  [NSString stringWithFormat:@"%@", fileNameURL];
-    [self uploadImage:chosenImage andPath:fileName];
-    [self dismisViewController:picker];
-}
-
-#pragma mark:- LoginViewDelegate methods
-- (void)showAlert {
-    [self.loginVew showAlertController];
-}
-
-- (void)updateScreenWithData {
-    [self.loginVew checkUser:self.login password:self.password apiKey:self.apiKey registered:self.registered];
-}
-
-- (void)changeProfileValues {
-    [self.loginVew changeProfileValues];
-}
-
-- (void)changeValues:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey and:(NSMutableArray *)users {
-    self.login = login;
-    self.password = password;
-    self.apiKey = apiKey;
-    [[NSUserDefaults standardUserDefaults] setObject:users forKey:@"Users"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)showViewController:(UIViewController *) viewController {
-    [self.likedView presentVC:viewController];
-}
-
-- (void)dismisViewController:(UIViewController *) viewController {
-    [self.likedView dismisVC:viewController];
-}
 
 
 

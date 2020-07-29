@@ -7,12 +7,12 @@
 //
 
 #import "LikedViewController.h"
-#import "MainPresenter.h"
+#import "UploadPresenter.h"
 #import "CatCell.h"
 
 @interface LikedViewController ()
 
-@property (nonatomic, strong) MainPresenter *presenter;
+@property (nonatomic, strong) UploadPresenter *presenter;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @end
@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.presenter = [MainPresenter sharedInstance];
+    self.presenter = [[UploadPresenter alloc]initWithUser];
     [self.presenter setLikedViewDelegate:self];
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -30,7 +30,7 @@
                              [[UIImage imageNamed:@"upload_selected"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                             style:UIBarButtonItemStylePlain target:self action:@selector(uploadImage)];
     self.navigationItem.rightBarButtonItem = upload;
-    [self.presenter isUserReadyForUpload];
+    [self.presenter checkUserRegistered];
 }
 
 - (void)checkUserRegistered:(NSString *)apiKey {
@@ -48,8 +48,6 @@
 }
 
 - (void)setupCollectionView {
-    
-    
     self.layout = [[UICollectionViewFlowLayout alloc] init];
     [self.layout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [self.layout setSectionInset:UIEdgeInsetsMake(20, 10, 0, 10)];
@@ -123,6 +121,13 @@
 
 - (void)dismisVC:(UIViewController *)controller {
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)showErrorAlert:(NSString *)error {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:error preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

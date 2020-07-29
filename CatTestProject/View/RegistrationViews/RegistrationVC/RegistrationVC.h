@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RegistrationVC : UIViewController <RegistrationViewDelegate>
 
-@property (nonatomic, strong) MainPresenter *presenter;
-
 @end
 
 NS_ASSUME_NONNULL_END

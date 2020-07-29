@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AuthenticationViewDelegate <NSObject>
 
-- (void)pushMainVC;
+- (void)showUnregisteredMainController;
 - (void)pushRegistrationVC;
 - (void)pushRegisteredUser;
 - (void)showWrongLoginOrPassword;

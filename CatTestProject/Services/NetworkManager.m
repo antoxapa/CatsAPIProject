@@ -99,7 +99,7 @@
     [self.queue addOperation:operation];
 }
 
-- (void)uploadImage:(NSString *)apiKey fileName:(NSString *)fileName image:(UIImage *)image {
+- (void)uploadImage:(NSString *)apiKey fileName:(NSString *)fileName image:(UIImage *)image completion:(void (^)(NSData *, NSURLResponse *response, NSError *error))completion {
     
     NSString *boundary = [NSString stringWithFormat:@"Boundary-%@", NSUUID.UUID.UUIDString];
     NSDictionary *headers = @{ @"content-type": [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary],
@@ -125,11 +125,13 @@
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             NSLog(@"%@", error);
+            completion(nil,nil,error);
         } else {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
             NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"%@", httpResponse);
             NSLog(@"%@", newStr);
+//            completion(nil,nil, newStr);
         }
     }];
     [dataTask resume];
