@@ -32,6 +32,7 @@
 }
 
 #pragma mark:- EnterApiViewDelegate methods
+
 - (void)registerUserAndPushMainVC:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey isActive:(NSString *)isActive {
     [self.userManager registerUser:login password:password apiKey:apiKey isActive:isActive];
     [self.apiView pushMainVC];

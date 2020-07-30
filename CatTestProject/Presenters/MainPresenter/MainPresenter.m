@@ -20,6 +20,7 @@
 #import "LikedViewDelegate.h"
 #import "ShowDismissProtocol.h"
 #import "Photos/Photos.h"
+#import "DetailViewController.h"
 
 @interface MainPresenter () 
 
@@ -109,6 +110,11 @@
 -(void)downloadCats {
     __weak typeof (self)weakSelf = self;
     [self.networkManager loadCats:^(NSMutableArray<CatModel *> * array, NSError * error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.catView showAlertController:[NSString stringWithFormat:@"%@", error]];
+            });
+        }
         weakSelf.catsArray = array;
         [weakSelf.catView showCats:array];
     }];
@@ -133,6 +139,7 @@
             weakSelf.detailVC.imageView.image = image;
         });
     }];
+    [self.detailVC.saveButton setHidden:NO];
 }
 
 - (void)cancelDownloadingImage:(NSIndexPath*)indexPath {
@@ -150,16 +157,18 @@
     [self.catView.collectionView.collectionViewLayout invalidateLayout];
 }
 
-
 - (void)pushDetailVC:(NSIndexPath *)indexPath {
-    
-//    CatCell *cell = [self.catView.collectionView cellForItemAtIndexPath:indexPath];
-//    DetailViewController *dvc = [[DetailViewController alloc]initWithImage:cell.catImageView.image andURL:cell.catImageURL];
-//    dvc.presenter = self;
-//    [self.catView presentDetailViewController:dvc];
+    CatCell *cell = [self.catView.collectionView cellForItemAtIndexPath:indexPath];
+    DetailViewController *dvc = [[DetailViewController alloc]initWithImage:cell.catImageView.image andURL:cell.catImageURL];
+    dvc.presenter = self;
+    [self.catView presentDetailViewController:dvc];
 }
 
-
-
+- (void)saveImageInGallery:(UIImage *)image {
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+}
+- (void)presentSaveAlertController {
+    [self.detailVC showSavedStatusAlert];
+}
 
 @end

@@ -17,6 +17,7 @@
 		06568C6924D200DF0097084C /* ApiViewPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C6824D200DF0097084C /* ApiViewPresenter.m */; };
 		06568C6F24D20AE10097084C /* LoginViewPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C6E24D20AE10097084C /* LoginViewPresenter.m */; };
 		06568C7324D228D50097084C /* UploadPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C7224D228D50097084C /* UploadPresenter.m */; };
+		06568C7824D2C58A0097084C /* CustomNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06568C7724D2C58A0097084C /* CustomNavController.m */; };
 		066583C724D01FC500723F3A /* AuthenticationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583C524D01FC500723F3A /* AuthenticationVC.m */; };
 		066583C824D01FC500723F3A /* AuthenticationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066583C624D01FC500723F3A /* AuthenticationVC.xib */; };
 		066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 066583CA24D0366D00723F3A /* RegistrationVC.m */; };
@@ -75,6 +76,8 @@
 		06568C6E24D20AE10097084C /* LoginViewPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewPresenter.m; sourceTree = "<group>"; };
 		06568C7124D228D50097084C /* UploadPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadPresenter.h; sourceTree = "<group>"; };
 		06568C7224D228D50097084C /* UploadPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadPresenter.m; sourceTree = "<group>"; };
+		06568C7624D2C58A0097084C /* CustomNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomNavController.h; sourceTree = "<group>"; };
+		06568C7724D2C58A0097084C /* CustomNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomNavController.m; sourceTree = "<group>"; };
 		066583C024CF876900723F3A /* DetailViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewDelegate.h; sourceTree = "<group>"; };
 		066583C424D01FC500723F3A /* AuthenticationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationVC.h; sourceTree = "<group>"; };
 		066583C524D01FC500723F3A /* AuthenticationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationVC.m; sourceTree = "<group>"; };
@@ -215,6 +218,15 @@
 			path = UploadPresenter;
 			sourceTree = "<group>";
 		};
+		06568C7524D23A030097084C /* MainPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				067773EF24CAED5900516D2B /* MainPresenter.h */,
+				067773F024CAED5900516D2B /* MainPresenter.m */,
+			);
+			path = MainPresenter;
+			sourceTree = "<group>";
+		};
 		066583CE24D0367400723F3A /* RegistrationVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +299,8 @@
 		067773EA24CAEB4200516D2B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				06568C7624D2C58A0097084C /* CustomNavController.h */,
+				06568C7724D2C58A0097084C /* CustomNavController.m */,
 				06568C5124D07B100097084C /* RegistrationViews */,
 				06568C5224D07B230097084C /* MainScreen */,
 				069C24D624CF7E1F003B8156 /* DetailVC */,
@@ -298,12 +312,11 @@
 		067773EE24CAED2C00516D2B /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				067773EF24CAED5900516D2B /* MainPresenter.h */,
-				067773F024CAED5900516D2B /* MainPresenter.m */,
-				06568C7424D228E60097084C /* UploadPresenter */,
 				06568C6C24D20AC50097084C /* AuthenticationPresenter */,
 				06568C6B24D20AB90097084C /* RegistrationPresenter */,
 				06568C6A24D20AB10097084C /* ApiPresenter */,
+				06568C7524D23A030097084C /* MainPresenter */,
+				06568C7424D228E60097084C /* UploadPresenter */,
 				06568C7024D2289A0097084C /* LoginPresenter */,
 			);
 			path = Presenters;
@@ -492,6 +505,7 @@
 				069C24C824CE277E003B8156 /* TabBarController.m in Sources */,
 				067773D024CADF7700516D2B /* main.m in Sources */,
 				066583CC24D0366D00723F3A /* RegistrationVC.m in Sources */,
+				06568C7824D2C58A0097084C /* CustomNavController.m in Sources */,
 				067773F124CAED5900516D2B /* MainPresenter.m in Sources */,
 				069C24D524CF7E18003B8156 /* DetailViewController.m in Sources */,
 				06568C6F24D20AE10097084C /* LoginViewPresenter.m in Sources */,
@@ -660,7 +674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6HUZSCYG3W;
 				INFOPLIST_FILE = CatTestProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -678,7 +692,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6HUZSCYG3W;
 				INFOPLIST_FILE = CatTestProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

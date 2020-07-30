@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "TabBarController.h"
 #import "AuthenticationVC.h"
+#import "CustomNavController.h"
 
 @interface SceneDelegate ()
 
@@ -20,9 +21,10 @@
 
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions  API_AVAILABLE(ios(13.0)){
+    
     UIWindow *window = [[UIWindow alloc]initWithWindowScene:(UIWindowScene *)scene];
     AuthenticationVC *vc = [[AuthenticationVC alloc]initWithNibName:@"AuthenticationVC" bundle:nil];
-    UINavigationController *mainController = [[UINavigationController alloc]initWithRootViewController:vc];
+    UINavigationController *mainController = [[CustomNavController alloc]initWithRootViewController:vc];
     [mainController setNavigationBarHidden:YES];
     mainController.navigationBar.barTintColor = [UIColor systemOrangeColor];
     mainController.navigationBar.translucent = NO;
@@ -31,28 +33,28 @@
     self.window = window;
     
     if (@available(iOS 13.0, *)) {
-
+        
         UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame];
-
+        
         if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-
+            
             statusBar.backgroundColor = [UIColor systemOrangeColor];
-
+            
         }
-
+        
         [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
-
-
-
+        
+        
+        
     } else {
         UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
-
+        
         if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-
+            
             statusBar.backgroundColor = [UIColor systemOrangeColor];
-
+            
         }
-
+        
     }
 }
 
@@ -87,7 +89,7 @@
     // Called as the scene transitions from the foreground to the background.
     // Use this method to save data, release shared resources, and store enough scene-specific state information
     // to restore the scene back to its current state.
-
+    
     // Save changes in the application's managed object context when the application transitions to the background.
     [(AppDelegate *)UIApplication.sharedApplication.delegate saveContext];
 }

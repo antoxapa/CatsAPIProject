@@ -14,8 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) UIButton *saveButton;
 
 - (instancetype)initWithImage:(UIImage *)image andURL:(NSString *)url;
+- (void)showSavedStatusAlert;
+
 
 @end
 

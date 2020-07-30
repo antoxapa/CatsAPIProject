@@ -23,6 +23,7 @@
     }
     return self;
 }
+#pragma mark:- RegistrationViewDelegate methods
 
 - (void)setRegistrationViewDelegate:(id<RegistrationViewDelegate>)view {
     self.registrationView = view;
@@ -36,14 +37,4 @@
         [self.registrationView presentEnterAPIVC];
     }
 }
-
-#pragma mark:- RegistrationViewDelegate methods
-
-//- (void)pressNextButton {
-//    [self.registrationView presentEnterAPIVC];
-//}
-//- (void)showAlreadyExistAlert {
-//    [self.registrationView showAlreadyExistAlert];
-//}
-
 @end

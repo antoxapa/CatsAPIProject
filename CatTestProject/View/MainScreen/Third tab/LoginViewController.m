@@ -41,11 +41,10 @@
     [self.loginTF setUserInteractionEnabled:NO];
     [self.passwordTF setUserInteractionEnabled:NO];
     
-    [self checkUserStatus];
-    
 }
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self checkUserStatus];
 }
 
 - (void)checkUserStatus {
@@ -84,36 +83,28 @@
     __weak typeof(self) weakSelf = self;
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.text = self.loginTF.text;
+        textField.text = weakSelf.loginTF.text;
         textField.secureTextEntry = NO;
     }];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.text = self.passwordTF.text;
+        textField.text = weakSelf.passwordTF.text;
         textField.secureTextEntry = NO;
     }];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.text = self.apiKeyTF.text;
+        textField.text = weakSelf.apiKeyTF.text;
         textField.secureTextEntry = NO;
     }];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.loginTF.text = [[alertController textFields][0] text];
         weakSelf.passwordTF.text = [[alertController textFields][1] text];
         weakSelf.apiKeyTF.text = [[alertController textFields][2] text];
-        [self.presenter changeValues:weakSelf.loginTF.text password:weakSelf.passwordTF.text apiKey:weakSelf.apiKeyTF.text];
+        [weakSelf.presenter changeValues:weakSelf.loginTF.text password:weakSelf.passwordTF.text apiKey:weakSelf.apiKeyTF.text];
     }];
     [alertController addAction:confirmAction];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
-    
 }
-
-//- (void)checkUser:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey registered:(BOOL)registered {
-//    self.loginTF.text = login;
-//    self.passwordTF.text = password;
-//    self.apiKeyTF.text = apiKey;
-//    self.registeredUser = registered;
-//}
 
 @end

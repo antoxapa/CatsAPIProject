@@ -15,6 +15,7 @@
 @property (nonatomic, strong) MainPresenter *presenter;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) UIButton *saveButton;
 
 @end
 

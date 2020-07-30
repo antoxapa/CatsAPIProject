@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startLoadingImages;
 
 - (void)pushDetailVC:(NSIndexPath *)indexPath;
+- (void)saveImageInGallery:(UIImage *)image;
+- (void)presentSaveAlertController;
 
 - (void)gridButtonTapped;
 

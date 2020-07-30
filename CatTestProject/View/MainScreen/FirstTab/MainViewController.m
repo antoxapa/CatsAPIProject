@@ -179,4 +179,14 @@
     }
 }
 
+- (void)showAlertController:(NSString *)error {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:error preferredStyle:UIAlertControllerStyleAlert];
+    __weak typeof(self) weakSelf = self;
+    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [weakSelf.navigationController popToRootViewControllerAnimated:NO];
+    }];
+    [alert addAction:OK];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 @end
