@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UploadPresenter *presenter;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
+
 @end
 
 @implementation LikedViewController
@@ -26,14 +28,10 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    UIBarButtonItem *upload=[[UIBarButtonItem alloc]initWithImage:
-                             [[UIImage imageNamed:@"upload_selected"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                            style:UIBarButtonItemStylePlain target:self action:@selector(uploadImage)];
-    self.navigationItem.rightBarButtonItem = upload;
     [self.presenter checkUserRegistered];
 }
 
-- (void)checkUserRegistered:(NSString *)apiKey {
+- (void)checkUserRegistered {
     [self setupCollectionView];
 }
 
@@ -48,6 +46,12 @@
 }
 
 - (void)setupCollectionView {
+    
+    UIBarButtonItem *upload=[[UIBarButtonItem alloc]initWithImage:
+                             [[UIImage imageNamed:@"upload_selected"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                            style:UIBarButtonItemStylePlain target:self action:@selector(uploadImage)];
+    self.navigationItem.rightBarButtonItem = upload;
+    
     self.layout = [[UICollectionViewFlowLayout alloc] init];
     [self.layout setScrollDirection:UICollectionViewScrollDirectionVertical];
     [self.layout setSectionInset:UIEdgeInsetsMake(20, 10, 0, 10)];
@@ -70,12 +74,32 @@
         [self.collectionView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor],
         [self.collectionView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
     ]];
+    
+    [self setupIndicator];
+}
+
+- (void)setupIndicator {
+    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+       [self.collectionView addSubview:self.indicator];
+    self.indicator.color = [UIColor whiteColor];
+       self.indicator.frame = CGRectMake(0, 0, 50, 50);
+       self.indicator.translatesAutoresizingMaskIntoConstraints = NO;
+       [NSLayoutConstraint activateConstraints:@[
+           [self.indicator.centerXAnchor constraintEqualToAnchor:self.collectionView.centerXAnchor],
+           [self.indicator.centerYAnchor constraintEqualToAnchor:self.collectionView.centerYAnchor],
+       ]];
+}
+
+- (void)stopIndicatorAnimating {
+    [self.indicator stopAnimating];
 }
 
 - (void)uploadImage {
+    [self.indicator startAnimating];
+    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self.presenter;
-    picker.allowsEditing = YES;
+    picker.allowsEditing = YES;;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self.presenter showViewController:picker];
 }
@@ -85,11 +109,10 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CatCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
+    return 0;
 }
 
 #pragma mark:- UICollectionViewDelegate methods
@@ -120,6 +143,7 @@
 }
 
 - (void)dismisVC:(UIViewController *)controller {
+    [self.indicator stopAnimating];
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 

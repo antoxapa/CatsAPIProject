@@ -17,11 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSURLSession *session;
 
+@property (nonatomic, strong) NSCache *cache;
 - (instancetype)initWithParser:(JSONParser *)parser;
-- (void)loadCats:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion;
+
 - (void)getCachedImageWithURL:(NSString *)stringURL completion:(void(^)(NSString *, UIImage *, NSError *))completion;
 - (void)cancelDownloadingForUrl:(NSString *)url;
 - (void)uploadImage:(NSString *)apiKey fileName:(NSString *)fileName image:(UIImage *)image completion:(void (^)(NSData *, NSURLResponse *response, NSError *error))completion;
+
+- (void)loadCats:(NSString *)urlString completion:(void (^)(NSData *, NSError *))completion;
+- (void)parseData:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion;
+- (void)loadImageForURL:(NSString *)url completion:(void (^)(NSData *, NSURLResponse *response, NSError *error))completion;
 
 
 @end

@@ -36,6 +36,7 @@
     
     [self.loginTF addTarget:self action:@selector(loginTFDidChange:)forControlEvents:UIControlEventEditingChanged];
     [self.loginButton setEnabled:NO];
+    self.loginButton.alpha = 0.5;
     [self.passwordTF addTarget:self action:@selector(passwordTFDidChange:)forControlEvents:UIControlEventEditingChanged];
 }
 
@@ -58,16 +59,20 @@
 - (void)loginTFDidChange:(UITextField *)textField {
     if (![self.passwordTF.text isEqualToString:@""] & ![textField.text isEqualToString:@""]) {
         [self.loginButton setEnabled:YES];
+        self.loginButton.alpha = 1;
     } else {
         [self.loginButton setEnabled:NO];
+        self.loginButton.alpha = 0.5;
     }
 }
 
 - (void)passwordTFDidChange:(UITextField *)textField {
     if (![self.loginTF.text isEqualToString:@""] & ![textField.text isEqualToString:@""]) {
         [self.loginButton setEnabled:YES];
+        self.loginButton.alpha = 1;
     } else {
         [self.loginButton setEnabled:NO];
+        self.loginButton.alpha = 0.5;
     }
 }
 

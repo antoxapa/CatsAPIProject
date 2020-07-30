@@ -40,6 +40,8 @@
     BOOL registered = [self.userManager checkUserStatus];
     if (!registered) {
         [self.likedView showAlertController];
+    } else {
+        [self.likedView checkUserRegistered];
     }
 }
 
@@ -57,6 +59,13 @@
                 [weakSelf showErrorAlert:[NSString stringWithFormat:@"%@",error]];
             });
         }
+        if (data) {
+            NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", newStr);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf showErrorAlert:newStr];
+            });
+        }
     }];
 }
 
@@ -66,6 +75,11 @@
     NSString *fileName =  [NSString stringWithFormat:@"%@", fileNameURL];
     [self uploadImage:chosenImage andPath:fileName];
     [self dismisViewController:picker];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self.likedView stopIndicatorAnimating];
+    [self.likedView dismisVC:picker];
 }
 
 - (void)showViewController:(UIViewController *) viewController {

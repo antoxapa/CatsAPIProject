@@ -15,7 +15,7 @@
 
 @interface NetworkManager ()
 
-@property (nonatomic, strong) NSCache *cache;
+
 @property (nonatomic, strong) NSOperationQueue *queue;
 @property (nonatomic, strong) JSONParser *parser;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, NSArray<NSOperation *> *> *operations;
@@ -43,22 +43,29 @@
     return self;
 }
 
-- (void)loadCats:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion {
-    NSURL *url = [NSURL URLWithString:@"https://api.thecatapi.com/v1/images/search?limit=21"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"GET";
-    __weak typeof(self)weakSelf = self;
-    NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+- (void)loadCats:(NSString *)urlString completion:(void (^)(NSData *, NSError *))completion {
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:url
+                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             completion(nil, error);
             return;
         }
-        
-        [weakSelf.parser parseCats:data completion:(completion)];
+        completion(data, nil);
     }];
     
     [dataTask resume];
+}
+
+- (void)parseData:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion {
+    NSString *url = @"https://api.thecatapi.com/v1/images/search?limit=21";
+    [self loadCats:url completion:^(NSData *data, NSError *error) {
+        if (data) {
+            [self.parser parseCats:data completion:completion];
+        } else {
+            completion(nil, error);
+        }
+    }];
 }
 
 -(void)getCachedImageWithURL:(NSString *)stringURL completion:(void(^)(NSString *, UIImage *, NSError *))completion {
@@ -123,11 +130,7 @@
             NSLog(@"%@", error);
             completion(nil,nil,error);
         } else {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-            NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", httpResponse);
-            NSLog(@"%@", newStr);
-            //            completion(nil,nil, newStr);
+            completion(data,nil, nil);
         }
     }];
     [dataTask resume];

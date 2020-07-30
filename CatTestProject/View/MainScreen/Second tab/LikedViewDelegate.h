@@ -12,9 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LikedViewDelegate <NSObject>
 
-- (void)checkUserRegistered:(NSString *)apiKey;
 - (void)showAlertController;
 - (void)showErrorAlert:(NSString *)error;
+- (void)checkUserRegistered;
+- (void)stopIndicatorAnimating;
+
 
 @end
 

@@ -67,7 +67,7 @@
 #pragma mark:- UICollectionViewDataSource
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    CatCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    CatCell *cell = (CatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     cell.catImageURL = self.catsArray[indexPath.row].url;
     __weak typeof(self)weakSelf = self;
     [self.networkManager getCachedImageWithURL:self.catsArray[indexPath.row].url completion:^(NSString *url, UIImage * image, NSError * error) {
@@ -109,7 +109,7 @@
 #pragma mark:-Downloading
 -(void)downloadCats {
     __weak typeof (self)weakSelf = self;
-    [self.networkManager loadCats:^(NSMutableArray<CatModel *> * array, NSError * error) {
+    [self.networkManager parseData:^(NSMutableArray<CatModel *> * array, NSError *error) {
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.catView showAlertController:[NSString stringWithFormat:@"%@", error]];
@@ -126,7 +126,7 @@
         [self.indicator startAnimating];
         self.isLoaded = YES;
         __weak typeof(self)weakSelf = self;
-        [self.networkManager loadCats:^(NSMutableArray<CatModel *> * array, NSError * error) {
+        [self.networkManager parseData:^(NSMutableArray<CatModel *> *array, NSError *error) {
             NSMutableArray *cats = array;
             [weakSelf.catView addMoreImages:cats];
         }];
@@ -158,7 +158,7 @@
 }
 
 - (void)pushDetailVC:(NSIndexPath *)indexPath {
-    CatCell *cell = [self.catView.collectionView cellForItemAtIndexPath:indexPath];
+    CatCell *cell = (CatCell *)[self.catView.collectionView cellForItemAtIndexPath:indexPath];
     DetailViewController *dvc = [[DetailViewController alloc]initWithImage:cell.catImageView.image andURL:cell.catImageURL];
     dvc.presenter = self;
     [self.catView presentDetailViewController:dvc];

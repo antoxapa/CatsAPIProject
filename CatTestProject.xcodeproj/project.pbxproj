@@ -39,6 +39,12 @@
 		069C24C824CE277E003B8156 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24C724CE277E003B8156 /* TabBarController.m */; };
 		069C24CB24CE2B36003B8156 /* LikedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24CA24CE2B36003B8156 /* LikedViewController.m */; };
 		069C24D524CF7E18003B8156 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069C24D424CF7E18003B8156 /* DetailViewController.m */; };
+		06A78A4824D2FF1400DAE162 /* NetworkManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A78A4724D2FF1400DAE162 /* NetworkManagerTest.m */; };
+		06A78A4E24D2FF5C00DAE162 /* RLURLSessionDataTaskMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A78A4B24D2FF5B00DAE162 /* RLURLSessionDataTaskMock.m */; };
+		06A78A4F24D2FF5C00DAE162 /* RLURLSessionMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A78A4C24D2FF5B00DAE162 /* RLURLSessionMock.m */; };
+		06A78A5124D3002D00DAE162 /* CatModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A78A5024D3002D00DAE162 /* CatModelTest.m */; };
+		06A78A5324D3033900DAE162 /* Mock_JSON in Resources */ = {isa = PBXBuildFile; fileRef = 06A78A5224D3033900DAE162 /* Mock_JSON */; };
+		06A78A5524D30E1B00DAE162 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A78A5424D30E1B00DAE162 /* cat.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +125,14 @@
 		069C24CA24CE2B36003B8156 /* LikedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikedViewController.m; sourceTree = "<group>"; };
 		069C24D324CF7E18003B8156 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		069C24D424CF7E18003B8156 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		06A78A4724D2FF1400DAE162 /* NetworkManagerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManagerTest.m; sourceTree = "<group>"; };
+		06A78A4A24D2FF5B00DAE162 /* RLURLSessionMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLURLSessionMock.h; sourceTree = "<group>"; };
+		06A78A4B24D2FF5B00DAE162 /* RLURLSessionDataTaskMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLURLSessionDataTaskMock.m; sourceTree = "<group>"; };
+		06A78A4C24D2FF5B00DAE162 /* RLURLSessionMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLURLSessionMock.m; sourceTree = "<group>"; };
+		06A78A4D24D2FF5B00DAE162 /* RLURLSessionDataTaskMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLURLSessionDataTaskMock.h; sourceTree = "<group>"; };
+		06A78A5024D3002D00DAE162 /* CatModelTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatModelTest.m; sourceTree = "<group>"; };
+		06A78A5224D3033900DAE162 /* Mock_JSON */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mock_JSON; sourceTree = "<group>"; };
+		06A78A5424D30E1B00DAE162 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +305,10 @@
 			isa = PBXGroup;
 			children = (
 				067773D924CADF7700516D2B /* CatTestProjectTests.m */,
+				06A78A4724D2FF1400DAE162 /* NetworkManagerTest.m */,
+				06A78A5024D3002D00DAE162 /* CatModelTest.m */,
+				06A78A4924D2FF5B00DAE162 /* Mock */,
+				06A78A5224D3033900DAE162 /* Mock_JSON */,
 				067773DB24CADF7700516D2B /* Info.plist */,
 			);
 			path = CatTestProjectTests;
@@ -396,6 +414,18 @@
 			path = DetailVC;
 			sourceTree = "<group>";
 		};
+		06A78A4924D2FF5B00DAE162 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				06A78A5424D30E1B00DAE162 /* cat.png */,
+				06A78A4A24D2FF5B00DAE162 /* RLURLSessionMock.h */,
+				06A78A4B24D2FF5B00DAE162 /* RLURLSessionDataTaskMock.m */,
+				06A78A4C24D2FF5B00DAE162 /* RLURLSessionMock.m */,
+				06A78A4D24D2FF5B00DAE162 /* RLURLSessionDataTaskMock.h */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -489,6 +519,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A78A5524D30E1B00DAE162 /* cat.png in Resources */,
+				06A78A5324D3033900DAE162 /* Mock_JSON in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +563,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A78A4F24D2FF5C00DAE162 /* RLURLSessionMock.m in Sources */,
+				06A78A4824D2FF1400DAE162 /* NetworkManagerTest.m in Sources */,
 				067773DA24CADF7700516D2B /* CatTestProjectTests.m in Sources */,
+				06A78A5124D3002D00DAE162 /* CatModelTest.m in Sources */,
+				06A78A4E24D2FF5C00DAE162 /* RLURLSessionDataTaskMock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

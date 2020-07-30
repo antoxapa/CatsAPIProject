@@ -33,28 +33,16 @@
     self.window = window;
     
     if (@available(iOS 13.0, *)) {
-        
         UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame];
-        
         if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-            
             statusBar.backgroundColor = [UIColor systemOrangeColor];
-            
         }
-        
         [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
-        
-        
-        
     } else {
         UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
-        
         if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-            
             statusBar.backgroundColor = [UIColor systemOrangeColor];
-            
         }
-        
     }
 }
 

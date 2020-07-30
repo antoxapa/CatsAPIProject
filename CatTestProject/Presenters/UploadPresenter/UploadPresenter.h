@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UploadPresenter : NSObject <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 - (instancetype)initWithUser;
--(void)setLikedViewDelegate:(id<LikedViewDelegate, ShowDismissProtocol>)view;
+- (void)setLikedViewDelegate:(id<LikedViewDelegate, ShowDismissProtocol>)view;
 - (void)checkUserRegistered;
--(void)registerCellsFor:(UICollectionView *)collectionView;
+- (void)registerCellsFor:(UICollectionView *)collectionView;
 - (void)showViewController:(UIViewController *) viewController;
 @end
 

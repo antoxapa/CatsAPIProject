@@ -33,7 +33,7 @@
                         <constraint firstAttribute="height" constant="34" id="Ddo-pD-qKr"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="695-9d-htf">
                     <rect key="frame" x="20" y="195" width="374" height="88"/>

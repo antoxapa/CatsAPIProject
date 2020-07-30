@@ -23,11 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property BOOL isLoaded;
 
 - (void)initNetworkManager;
-
 - (void)registerCellsFor:(UICollectionView *)collectionView;
 
 - (void)setViewDelegate:(id<CatViewDelegate>)view;
-
 - (void)setDetailViewDelegate:(id<DetailViewDelegate>)view;
 
 - (void)downloadCats;
