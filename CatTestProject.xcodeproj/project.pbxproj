@@ -45,6 +45,7 @@
 		06A78A5124D3002D00DAE162 /* CatModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A78A5024D3002D00DAE162 /* CatModelTest.m */; };
 		06A78A5324D3033900DAE162 /* Mock_JSON in Resources */ = {isa = PBXBuildFile; fileRef = 06A78A5224D3033900DAE162 /* Mock_JSON */; };
 		06A78A5524D30E1B00DAE162 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A78A5424D30E1B00DAE162 /* cat.png */; };
+		06A78A5924D328EF00DAE162 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A78A5824D328EF00DAE162 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		06A78A5024D3002D00DAE162 /* CatModelTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatModelTest.m; sourceTree = "<group>"; };
 		06A78A5224D3033900DAE162 /* Mock_JSON */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mock_JSON; sourceTree = "<group>"; };
 		06A78A5424D30E1B00DAE162 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
+		06A78A5824D328EF00DAE162 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +419,7 @@
 		06A78A4924D2FF5B00DAE162 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				06A78A5824D328EF00DAE162 /* icon.png */,
 				06A78A5424D30E1B00DAE162 /* cat.png */,
 				06A78A4A24D2FF5B00DAE162 /* RLURLSessionMock.h */,
 				06A78A4B24D2FF5B00DAE162 /* RLURLSessionDataTaskMock.m */,
@@ -521,6 +524,7 @@
 			files = (
 				06A78A5524D30E1B00DAE162 /* cat.png in Resources */,
 				06A78A5324D3033900DAE162 /* Mock_JSON in Resources */,
+				06A78A5924D328EF00DAE162 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

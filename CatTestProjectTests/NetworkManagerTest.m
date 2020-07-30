@@ -14,7 +14,6 @@
 @interface NetworkManagerTest : XCTestCase
 
 @property (nonatomic, strong) NetworkManager *networkManager;
-@property (nonatomic, strong) NSCache *cache;
 @property (nonatomic, strong) JSONParser *parser;
 
 @property (nonatomic, strong) RLURLSessionMock *mockSession;
