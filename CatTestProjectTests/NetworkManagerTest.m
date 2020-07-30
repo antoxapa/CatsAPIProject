@@ -37,11 +37,9 @@
     NSData *mockData = [[NSData alloc]initWithContentsOfFile:filePath];
     self.mockSession.data = mockData;
     self.networkManager.session = self.mockSession;
-    __block NSData* resultData = nil;
     [self.networkManager loadCats:filePath completion:^(NSData *data, NSError *error) {
-        resultData = data;
+        XCTAssertEqual(mockData, data);
     }];
-    XCTAssertEqual(mockData, resultData);
 }
 
 - (void)testParsing {
@@ -77,8 +75,6 @@
     NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"cat.png" ofType:nil];
     [self.networkManager getCachedImageWithURL:filePath completion:^(NSString *string, UIImage *image, NSError *error) {
         XCTAssertEqual(cat, image);
-        XCTAssertEqual(filePath, string);
-        XCTAssertEqual(error, nil);
     }];
 }
 
