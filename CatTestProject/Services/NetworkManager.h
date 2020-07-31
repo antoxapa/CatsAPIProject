@@ -25,8 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)uploadImage:(NSString *)apiKey fileName:(NSString *)fileName image:(UIImage *)image completion:(void (^)(NSData *, NSURLResponse *response, NSError *error))completion;
 
 - (void)loadCats:(NSString *)urlString completion:(void (^)(NSData *, NSError *))completion;
-- (void)parseData:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion;
+- (void)parseData:(NSString *)url completion:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion;
 - (void)loadImageForURL:(NSString *)url completion:(void (^)(NSData *, NSURLResponse *response, NSError *error))completion;
+- (void)parseUloadedData:(NSString *)url apiKey:(NSString *)apiKey completion:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion;
 
 
 @end

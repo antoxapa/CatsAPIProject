@@ -53,12 +53,51 @@
         }
         completion(data, nil);
     }];
-    
     [dataTask resume];
 }
 
-- (void)parseData:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion {
-    NSString *url = @"https://api.thecatapi.com/v1/images/search?limit=21";
+- (void)loadUploadedCats:(NSString *)urlString apiKey:(NSString *)apiKey completion:(void (^)(NSData *, NSError *))completion {
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSDictionary *headers = @{ @"x-api-key": apiKey };
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:10.0];
+    [request setHTTPMethod:@"GET"];
+    [request setAllHTTPHeaderFields:headers];
+    
+    NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
+                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        
+        NSString *someString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", someString);
+        if ([someString containsString:@"AUTHENTICATION_ERROR"]) {
+            completion(nil,nil);
+            return;
+        }
+        if (error) {
+            NSLog(@"%@", error);
+            completion(nil,error);
+        } else {
+            completion(data, nil);
+        }
+    }];
+    [dataTask resume];
+}
+
+- (void)parseUloadedData:(NSString *)url apiKey:(NSString *)apiKey completion:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion {
+    [self loadUploadedCats:url apiKey:apiKey completion:^(NSData *data, NSError *error) {
+        if (data) {
+            [self.parser parseCats:data completion:completion];
+        } else {
+            completion(nil, error);
+        }
+    }];
+}
+
+- (void)parseData:(NSString *)url completion:(void (^)(NSMutableArray<CatModel *> *, NSError *))completion {
+    
     [self loadCats:url completion:^(NSData *data, NSError *error) {
         if (data) {
             [self.parser parseCats:data completion:completion];
@@ -67,6 +106,7 @@
         }
     }];
 }
+
 
 -(void)getCachedImageWithURL:(NSString *)stringURL completion:(void(^)(NSString *, UIImage *, NSError *))completion {
     __weak typeof(self) weakSelf = self;
@@ -124,9 +164,8 @@
     request.HTTPBody = httpBody;
     
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
-                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
-            NSLog(@"%@", error);
             completion(nil,nil,error);
         } else {
             completion(data,nil, nil);

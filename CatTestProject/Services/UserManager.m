@@ -80,6 +80,19 @@
     return NO;
 }
 
+- (NSString *)checkUserApi {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Users"]) {
+        NSMutableArray *users = [[[NSUserDefaults standardUserDefaults]objectForKey:@"Users"] mutableCopy];
+        for (NSDictionary *user in users) {
+            self.isActive = user[@"IsActive"];
+            if ([self.isActive isEqualToString:@"YES"]) {
+                return user[@"ApiKey"];
+            }
+        }
+    }
+    return nil;
+}
+
 - (void)editUserInfo:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Users"]) {
         NSMutableArray *users = [[[NSUserDefaults standardUserDefaults]objectForKey:@"Users"] mutableCopy];

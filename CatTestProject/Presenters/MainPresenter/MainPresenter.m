@@ -8,35 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "MainPresenter.h"
-#import "MainViewController.h"
 #import "CatModel.h"
-#import "CatViewDelegate.h"
 #import "CatCell.h"
+#import "CatViewDelegate.h"
 #import "DetailViewDelegate.h"
-#import "AuthenticationViewDelegate.h"
-#import "EnterApiViewDelegate.h"
-#import "RegistrationViewDelegate.h"
-#import "LoginViewDelegate.h"
-#import "LikedViewDelegate.h"
-#import "ShowDismissProtocol.h"
-#import "Photos/Photos.h"
 #import "DetailViewController.h"
 
 @interface MainPresenter () 
 
 @property (nonatomic, weak)  id<CatViewDelegate> catView;
-
 @property (nonatomic, strong) id<DetailViewDelegate> detailVC;
-
 @property (nonatomic, strong) NetworkManager *networkManager;
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
-@property (nonatomic, strong) UIActivityIndicatorView *indicator;
-@property (nonatomic) int numberOfItems;
-
 @property (nonatomic, strong) NSString *login;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *apiKey;
 @property BOOL registered;
+@property (nonatomic) int numberOfItems;
 
 @property BOOL gridTapped;
 
@@ -64,52 +52,11 @@
     [collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"Footer"];
 }
 
-#pragma mark:- UICollectionViewDataSource
-
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    CatCell *cell = (CatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.catImageURL = self.catsArray[indexPath.row].url;
-    __weak typeof(self)weakSelf = self;
-    [self.networkManager getCachedImageWithURL:self.catsArray[indexPath.row].url completion:^(NSString *url, UIImage * image, NSError * error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
-        if (image) {
-            if ([weakSelf.catsArray[indexPath.row].url isEqualToString:cell.catImageURL]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.catImageView.image = image;
-                });
-            }
-        }
-    }];
-    return cell;
-}
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"Footer" forIndexPath:indexPath];
-    
-    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [footer addSubview:self.indicator];
-    self.indicator.color = UIColor.whiteColor;
-    self.indicator.frame = CGRectMake(0, 0, 30, 30);
-    
-    self.indicator.translatesAutoresizingMaskIntoConstraints = NO;
-    [NSLayoutConstraint activateConstraints:@[
-        [self.indicator.centerXAnchor constraintEqualToAnchor:footer.centerXAnchor],
-        [self.indicator.centerYAnchor constraintEqualToAnchor:footer.centerYAnchor],
-    ]];
-    [self.indicator setUserInteractionEnabled:NO];
-    return footer;
-}
-
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.catsArray.count;
-}
-
 #pragma mark:-Downloading
 -(void)downloadCats {
     __weak typeof (self)weakSelf = self;
-    [self.networkManager parseData:^(NSMutableArray<CatModel *> * array, NSError *error) {
+    NSString *url = @"https://api.thecatapi.com/v1/images/search?limit=21";
+    [self.networkManager parseData:url completion:^(NSMutableArray<CatModel *> *array, NSError *error) {
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.catView showAlertController:[NSString stringWithFormat:@"%@", error]];
@@ -122,11 +69,11 @@
 
 - (void)startLoadingImages {
     if (!self.isLoaded) {
-        [self.indicator setHidden:NO];
-        [self.indicator startAnimating];
+        [self.catView startIndicator];
         self.isLoaded = YES;
         __weak typeof(self)weakSelf = self;
-        [self.networkManager parseData:^(NSMutableArray<CatModel *> *array, NSError *error) {
+        NSString *url = @"https://api.thecatapi.com/v1/images/search?limit=21";
+        [self.networkManager parseData:url completion:^(NSMutableArray<CatModel *> *array, NSError *error) {
             NSMutableArray *cats = array;
             [weakSelf.catView addMoreImages:cats];
         }];
@@ -146,6 +93,24 @@
     [self.networkManager cancelDownloadingForUrl:self.catsArray[indexPath.row].url];
 }
 
+- (void)downloadImageForCell:(CatCell *)cell andIndexPath:(NSIndexPath *)indexPath {
+    cell.catImageURL = self.catsArray[indexPath.row].url;
+    __weak typeof(self)weakSelf = self;
+    [self.networkManager getCachedImageWithURL:self.catsArray[indexPath.row].url completion:^(NSString *url, UIImage * image, NSError * error) {
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        if (image) {
+            if ([weakSelf.catsArray[indexPath.row].url isEqualToString:cell.catImageURL]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.catImageView.image = image;
+                });
+            }
+        }
+    }];
+}
+
+#pragma mark:- Presenter methods
 -(void)gridButtonTapped {
     if (self.catView.numberOfItems == 1) {
         self.catView.numberOfItems = 3;
@@ -156,6 +121,7 @@
     }
     [self.catView.collectionView.collectionViewLayout invalidateLayout];
 }
+
 
 - (void)pushDetailVC:(NSIndexPath *)indexPath {
     CatCell *cell = (CatCell *)[self.catView.collectionView cellForItemAtIndexPath:indexPath];

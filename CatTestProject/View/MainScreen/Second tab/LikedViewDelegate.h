@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CatModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showAlertController;
 - (void)showErrorAlert:(NSString *)error;
 - (void)checkUserRegistered;
+
+- (void)startIndicatorAnimating;
 - (void)stopIndicatorAnimating;
+
+- (void)showCats:(NSMutableArray<CatModel *>*)array;
+- (void)startIndicator;
+- (void)addMoreImages:(NSMutableArray<CatModel *>*)array;
+- (void)showAuthErrorAlert;
 
 
 @end

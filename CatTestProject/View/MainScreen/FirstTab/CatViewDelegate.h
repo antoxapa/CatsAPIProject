@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addMoreImages:(NSMutableArray<CatModel *>*)array;
 - (void)presentDetailViewController:(UIViewController *)controller;
 - (void)showAlertController:(NSString *)error;
+- (void)startIndicator;
 
 @end
 

@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)editUserInfo:(NSString *)login password:(NSString *)password apiKey:(NSString *)apiKey;
 - (NSDictionary *)updateUserInfo;
+- (NSString *)checkUserApi;
 - (void)logout;
+
 @end
 
 NS_ASSUME_NONNULL_END

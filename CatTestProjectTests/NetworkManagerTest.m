@@ -47,8 +47,9 @@
     NSData *mockData = [[NSData alloc]initWithContentsOfFile:filePath];
     self.mockSession.data = mockData;
     self.networkManager.session = self.mockSession;
+    NSString *url  = @"Random URL";
     
-    [self.networkManager parseData:^(NSMutableArray<CatModel *> * array, NSError * error) {
+    [self.networkManager parseData:url completion:^(NSMutableArray<CatModel *> *array, NSError *error) {
         XCTAssertTrue(array.count == 2);
     }];
 }

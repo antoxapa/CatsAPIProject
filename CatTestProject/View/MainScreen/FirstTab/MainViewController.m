@@ -10,6 +10,7 @@
 #import "MainPresenter.h"
 #import "NetworkManager.h"
 #import "JSONParser.h"
+#import "CatCell.h"
 
 @interface MainViewController () 
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray<CatModel *> *catsArray;
 @property (nonatomic, strong) UIView *footerIndicatorView;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
+@property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
 
 @end
 
@@ -66,7 +68,7 @@
     
     self.collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:self.layout];
     self.collectionView.delegate = self;
-    self.collectionView.dataSource = self.presenter;
+    self.collectionView.dataSource = self;
     
     [self.presenter registerCellsFor:self.collectionView];
     
@@ -92,6 +94,11 @@
     });
 }
 
+-(void)startIndicator {
+    [self.loadingIndicator setHidden:NO];
+    [self.loadingIndicator startAnimating];
+}
+
 - (void)changeLayout {
     [self.presenter gridButtonTapped];
 }
@@ -108,6 +115,34 @@
 - (void)presentDetailViewController:(UIViewController *)controller {
     [self presentViewController:controller animated:YES completion:nil];
 }
+
+#pragma mark:- UICollectionViewDataSource
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    CatCell *cell = (CatCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    [self.presenter downloadImageForCell:cell andIndexPath:indexPath];
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"Footer" forIndexPath:indexPath];
+    self.loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [footer addSubview:self.loadingIndicator];
+    self.loadingIndicator.color = UIColor.whiteColor;
+    self.loadingIndicator.frame = CGRectMake(0, 0, 30, 30);
+    self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [self.loadingIndicator.centerXAnchor constraintEqualToAnchor:footer.centerXAnchor],
+        [self.loadingIndicator.centerYAnchor constraintEqualToAnchor:footer.centerYAnchor],
+    ]];
+    [self.loadingIndicator setUserInteractionEnabled:NO];
+    return footer;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.catsArray.count;
+}
+
 
 #pragma mark:- UICollectionViewDelegate
 
